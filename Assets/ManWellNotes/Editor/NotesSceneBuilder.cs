@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 namespace ManWellNotesEditor
 {
@@ -18,6 +19,7 @@ namespace ManWellNotesEditor
         public static void Build()
         {
             Scene scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
+            TMP_FontAsset primaryFont = NotesFontBuilder.BuildPrimaryFont();
 
             // Rebuilding is intentional: remove only the app root and leave cameras,
             // lighting, and any unrelated objects in the scene untouched.
@@ -27,7 +29,7 @@ namespace ManWellNotesEditor
 
             GameObject root = new GameObject(RootName, typeof(RectTransform));
             NotesApp app = root.AddComponent<NotesApp>();
-            app.BuildSceneInterface();
+            app.BuildSceneInterface(primaryFont);
 
             EditorUtility.SetDirty(app);
             EditorSceneManager.MarkSceneDirty(scene);

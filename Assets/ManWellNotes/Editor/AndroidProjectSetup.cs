@@ -33,13 +33,13 @@ namespace ManWellNotesEditor
             PlayerSettings.SetScriptingBackend(android, ScriptingImplementation.IL2CPP);
             PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
 
-            // The current three-column interface is intentionally landscape-only.
-            PlayerSettings.defaultInterfaceOrientation = UIOrientation.AutoRotation;
+            // The Android interface uses one full-screen page at a time.
+            PlayerSettings.defaultInterfaceOrientation = UIOrientation.Portrait;
             PlayerSettings.allowedAutorotateToPortrait = false;
             PlayerSettings.allowedAutorotateToPortraitUpsideDown = false;
-            PlayerSettings.allowedAutorotateToLandscapeLeft = true;
-            PlayerSettings.allowedAutorotateToLandscapeRight = true;
-            PlayerSettings.useAnimatedAutorotation = true;
+            PlayerSettings.allowedAutorotateToLandscapeLeft = false;
+            PlayerSettings.allowedAutorotateToLandscapeRight = false;
+            PlayerSettings.useAnimatedAutorotation = false;
 
             EditorUserBuildSettings.buildAppBundle = false; // Build an APK while prototyping.
             EditorUserBuildSettings.exportAsGoogleAndroidProject = false;
@@ -57,7 +57,7 @@ namespace ManWellNotesEditor
             }
 
             AssetDatabase.SaveAssets();
-            Debug.Log($"Configured Android: {ApplicationId}, ARM64, IL2CPP, landscape, minimum API 26.");
+            Debug.Log($"Configured Android: {ApplicationId}, ARM64, IL2CPP, portrait, minimum API 26.");
         }
     }
 }

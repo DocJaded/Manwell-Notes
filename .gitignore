@@ -8,6 +8,8 @@
 [Uu]ser[Ss]ettings/
 [Mm]emoryCaptures/
 [Rr]ecordings/
+.utmp/
+Release_APK/
 
 # IDE-generated files
 .vs/
@@ -36,4 +38,3 @@ desktop.ini
 
 # Crash reports
 crashlytics-build.properties
-

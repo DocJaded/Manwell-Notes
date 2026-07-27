@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem.UI;
 using UnityEngine.UI;
+using TMPro;
 
 namespace ManWellNotes
 {
@@ -22,25 +23,31 @@ namespace ManWellNotes
         // UI GameObjects in the Editor. The scene builder assigns all of these once.
         [Header("Notes list")]
         [SerializeField] private RectTransform notesContent;
-        [SerializeField] private Text notesHeading;
-        [SerializeField] private Text emptyMessage;
-        [SerializeField] private InputField searchField;
+        [SerializeField] private TMP_Text notesHeading;
+        [SerializeField] private TMP_Text emptyMessage;
+        [SerializeField] private TMP_InputField searchField;
 
         [Header("Editor")]
         [SerializeField] private GameObject editorPanel;
-        [SerializeField] private InputField titleField;
-        [SerializeField] private InputField bodyField;
+        [SerializeField] private TMP_InputField titleField;
+        [SerializeField] private TMP_InputField bodyField;
         [SerializeField] private Button pinButton;
-        [SerializeField] private Text pinButtonText;
+        [SerializeField] private TMP_Text pinButtonText;
 
         [Header("Status")]
-        [SerializeField] private Text statusText;
+        [SerializeField] private TMP_Text statusText;
+
+        [Header("Page navigation")]
+        [SerializeField] private NotesPageNavigator pageNavigator;
+
+        [Header("Typography")]
+        [Tooltip("Sekaiwo is the primary face. Its saved TMP asset contains the Noto fallback chain.")]
+        [SerializeField] private TMP_FontAsset font;
 
         private NoteStore store;
         private readonly List<NoteData> notes = new List<NoteData>();
         private readonly List<GameObject> noteCards = new List<GameObject>();
 
-        private Font font;
         private NoteData selectedNote;
         private bool suppressEditorEvents;
         private bool saveQueued;
@@ -48,14 +55,13 @@ namespace ManWellNotes
 
         private void Awake()
         {
-            font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
             // Unity API properties such as persistentDataPath are safe from Awake onward.
             // Constructing NoteStore here avoids accessing them in a field initializer.
             store = new NoteStore();
 
             // A missing reference means the scene builder was not run or a required
             // object was deleted. We stop here instead of silently creating runtime UI.
-            if (notesContent == null || searchField == null || titleField == null || bodyField == null)
+            if (font == null || notesContent == null || searchField == null || titleField == null || bodyField == null)
             {
                 Debug.LogError("Man-Well Notes is not configured. Rebuild the notes interface from the Editor.");
                 enabled = false;
@@ -68,9 +74,11 @@ namespace ManWellNotes
 
             NoteData initial = SortedNotes().FirstOrDefault();
             if (initial != null)
-                SelectNote(initial);
+                SelectNote(initial, false);
             else
                 ShowEmptyEditor();
+
+            pageNavigator.ShowLibraryPage();
         }
 
         // UnityEvent listeners added with AddListener are runtime-only. Keeping all
@@ -114,9 +122,11 @@ namespace ManWellNotes
 
         // Called by NotesSceneBuilder while editing the scene. It deliberately creates
         // ordinary GameObjects, components and serialized references—not runtime UI.
-        public void BuildSceneInterface()
+        public void BuildSceneInterface(TMP_FontAsset primaryFont)
         {
-            font = Resources.GetBuiltinResource<Font>("LegacyRuntime.ttf");
+            // The asset itself stores its ordered fallback list, so every text object
+            // only needs a reference to the Sekaiwo primary font.
+            font = primaryFont;
             EnsureEventSystem();
 
             Canvas canvas = gameObject.AddComponent<Canvas>();
@@ -135,6 +145,11 @@ namespace ManWellNotes
 
             GameObject shell = Panel("App", background.transform, Paper);
             Stretch(shell.GetComponent<RectTransform>(), 18f, 18f, 18f, 18f);
+
+            // Keep every generated page above Android's keyboard, including the
+            // notes search page as well as the title and body editor.
+            shell.AddComponent<KeyboardSafeArea>();
+
             HorizontalLayoutGroup shellLayout = shell.AddComponent<HorizontalLayoutGroup>();
             shellLayout.spacing = 1f;
             shellLayout.childControlWidth = true;
@@ -162,25 +177,25 @@ namespace ManWellNotes
             layout.childControlHeight = true;
             layout.childForceExpandWidth = true;
 
-            Text brand = Label("MAN-WELL", sidebar.transform, 24, FontStyle.Bold, White);
+            TMP_Text brand = Label("MAN-WELL", sidebar.transform, 24, FontStyles.Bold, White);
             brand.gameObject.AddComponent<LayoutElement>().preferredHeight = 35f;
 
-            Text subtitle = Label("NOTES", sidebar.transform, 11, FontStyle.Bold, new Color32(190, 190, 190, 255));
+            TMP_Text subtitle = Label("NOTES", sidebar.transform, 11, FontStyles.Bold, new Color32(190, 190, 190, 255));
             subtitle.gameObject.AddComponent<LayoutElement>().preferredHeight = 26f;
 
-            Button newButton = CreateButton("+   New note", sidebar.transform, White, Ink, 15, FontStyle.Bold);
+            Button newButton = CreateButton("+   New note", sidebar.transform, White, Ink, 15, FontStyles.Bold);
             newButton.gameObject.name = "New note";
             newButton.GetComponent<LayoutElement>().preferredHeight = 48f;
 
             Spacer(sidebar.transform, 15f);
-            Text library = Label("LIBRARY", sidebar.transform, 11, FontStyle.Bold, new Color32(155, 155, 155, 255));
+            TMP_Text library = Label("LIBRARY", sidebar.transform, 11, FontStyles.Bold, new Color32(155, 155, 155, 255));
             library.gameObject.AddComponent<LayoutElement>().preferredHeight = 22f;
 
-            Button allNotes = CreateButton("All notes", sidebar.transform, new Color32(38, 38, 38, 255), White, 15, FontStyle.Bold);
+            Button allNotes = CreateButton("All notes", sidebar.transform, new Color32(38, 38, 38, 255), White, 15, FontStyles.Bold);
             allNotes.gameObject.name = "All notes";
             allNotes.GetComponent<LayoutElement>().preferredHeight = 44f;
 
-            Button pinned = CreateButton("Pinned", sidebar.transform, Ink, White, 15, FontStyle.Normal);
+            Button pinned = CreateButton("Pinned", sidebar.transform, Ink, White, 15, FontStyles.Normal);
             pinned.gameObject.name = "Pinned";
             pinned.GetComponent<LayoutElement>().preferredHeight = 44f;
 
@@ -188,10 +203,10 @@ namespace ManWellNotes
             flexible.transform.SetParent(sidebar.transform, false);
             flexible.GetComponent<LayoutElement>().flexibleHeight = 1f;
 
-            statusText = Label("Ready", sidebar.transform, 12, FontStyle.Normal, new Color32(180, 180, 180, 255));
+            statusText = Label("Ready", sidebar.transform, 12, FontStyles.Normal, new Color32(180, 180, 180, 255));
             statusText.gameObject.AddComponent<LayoutElement>().preferredHeight = 22f;
 
-            Text storage = Label("Stored privately on this device", sidebar.transform, 10, FontStyle.Normal, new Color32(125, 125, 125, 255));
+            TMP_Text storage = Label("Stored privately on this device", sidebar.transform, 10, FontStyles.Normal, new Color32(125, 125, 125, 255));
             storage.gameObject.AddComponent<LayoutElement>().preferredHeight = 28f;
         }
 
@@ -209,7 +224,7 @@ namespace ManWellNotes
             layout.childControlHeight = true;
             layout.childForceExpandWidth = true;
 
-            notesHeading = Label("All notes", pane.transform, 27, FontStyle.Bold, Ink);
+            notesHeading = Label("All notes", pane.transform, 27, FontStyles.Bold, Ink);
             notesHeading.gameObject.AddComponent<LayoutElement>().preferredHeight = 38f;
 
             searchField = CreateInput("Search notes", pane.transform, 14, false);
@@ -252,9 +267,9 @@ namespace ManWellNotes
             fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
             scroll.content = notesContent;
 
-            emptyMessage = Label("No notes yet.\nCreate one to get started.", viewport.transform, 15, FontStyle.Normal, Muted);
+            emptyMessage = Label("No notes yet.\nCreate one to get started.", viewport.transform, 15, FontStyles.Normal, Muted);
             Stretch(emptyMessage.rectTransform, 20f, 20f, 20f, 20f);
-            emptyMessage.alignment = TextAnchor.MiddleCenter;
+            emptyMessage.alignment = TextAlignmentOptions.Center;
         }
 
         private void BuildEditor(Transform parent)
@@ -279,20 +294,20 @@ namespace ManWellNotes
             toolbarLayout.childControlHeight = true;
             toolbarLayout.childForceExpandHeight = true;
 
-            pinButton = CreateButton("Pin", toolbar.transform, Soft, Ink, 13, FontStyle.Bold);
+            pinButton = CreateButton("Pin", toolbar.transform, Soft, Ink, 13, FontStyles.Bold);
             pinButton.GetComponent<LayoutElement>().preferredWidth = 82f;
-            pinButtonText = pinButton.GetComponentInChildren<Text>();
+            pinButtonText = pinButton.GetComponentInChildren<TMP_Text>();
 
             GameObject toolbarSpace = new GameObject("Space", typeof(RectTransform), typeof(LayoutElement));
             toolbarSpace.transform.SetParent(toolbar.transform, false);
             toolbarSpace.GetComponent<LayoutElement>().flexibleWidth = 1f;
 
-            Button deleteButton = CreateButton("Delete", toolbar.transform, Ink, White, 13, FontStyle.Bold);
+            Button deleteButton = CreateButton("Delete", toolbar.transform, Ink, White, 13, FontStyles.Bold);
             deleteButton.gameObject.name = "Delete";
             deleteButton.GetComponent<LayoutElement>().preferredWidth = 92f;
 
             titleField = CreateInput("Title", editorPanel.transform, 31, false);
-            titleField.textComponent.fontStyle = FontStyle.Bold;
+            titleField.textComponent.fontStyle = FontStyles.Bold;
             titleField.GetComponent<Image>().color = Paper;
             titleField.GetComponent<LayoutElement>().preferredHeight = 65f;
 
@@ -304,18 +319,24 @@ namespace ManWellNotes
             LayoutElement bodySize = bodyField.GetComponent<LayoutElement>();
             bodySize.flexibleHeight = 1f;
             bodySize.minHeight = 400f;
+
+            // The editor uses a vertical layout, so placing the existing toolbar last
+            // keeps Back, Pin and Delete at the bottom in newly generated scenes too.
+            toolbar.transform.SetAsLastSibling();
         }
 
         private void ShowAllNotes()
         {
             searchField.text = string.Empty;
             RefreshList();
+            pageNavigator.ShowNotesPage();
         }
 
         private void ShowPinnedNotes()
         {
             searchField.text = "is:pinned";
             RefreshList();
+            pageNavigator.ShowNotesPage();
         }
 
         private void CreateNewNote()
@@ -344,7 +365,10 @@ namespace ManWellNotes
             if (remaining.Count > 0)
                 SelectNote(remaining[Mathf.Clamp(oldIndex, 0, remaining.Count - 1)]);
             else
+            {
                 ShowEmptyEditor();
+                pageNavigator.ShowNotesPage();
+            }
 
             SaveImmediately();
         }
@@ -361,7 +385,7 @@ namespace ManWellNotes
             QueueSave();
         }
 
-        private void SelectNote(NoteData note)
+        private void SelectNote(NoteData note, bool navigateToEditor = true)
         {
             if (note == null)
                 return;
@@ -375,6 +399,9 @@ namespace ManWellNotes
             suppressEditorEvents = false;
             editorPanel.SetActive(true);
             RefreshList();
+
+            if (navigateToEditor)
+                pageNavigator.ShowEditorPage();
         }
 
         private void ShowEmptyEditor()
@@ -477,17 +504,17 @@ namespace ManWellNotes
             string title = string.IsNullOrWhiteSpace(note.title) ? "Untitled note" : note.title.Trim();
             if (note.pinned)
                 title = "PINNED  ·  " + title;
-            Text titleText = Label(title, cardObject.transform, 15, FontStyle.Bold, active ? White : Ink);
+            TMP_Text titleText = Label(title, cardObject.transform, 15, FontStyles.Bold, active ? White : Ink);
             titleText.gameObject.AddComponent<LayoutElement>().preferredHeight = 23f;
 
             string preview = string.IsNullOrWhiteSpace(note.body)
                 ? "No additional text"
                 : note.body.Replace("\r", " ").Replace("\n", " ").Trim();
-            Text previewText = Label(preview, cardObject.transform, 12, FontStyle.Normal, active ? new Color32(210, 210, 210, 255) : Muted);
+            TMP_Text previewText = Label(preview, cardObject.transform, 12, FontStyles.Normal, active ? new Color32(210, 210, 210, 255) : Muted);
             previewText.gameObject.AddComponent<LayoutElement>().preferredHeight = 21f;
 
             DateTime modified = new DateTime(Math.Max(note.modifiedUtcTicks, DateTime.MinValue.Ticks), DateTimeKind.Utc).ToLocalTime();
-            Text dateText = Label(FormatDate(modified), cardObject.transform, 10, FontStyle.Normal, active ? new Color32(160, 160, 160, 255) : Muted);
+            TMP_Text dateText = Label(FormatDate(modified), cardObject.transform, 10, FontStyles.Normal, active ? new Color32(160, 160, 160, 255) : Muted);
             dateText.gameObject.AddComponent<LayoutElement>().preferredHeight = 18f;
         }
 
@@ -549,24 +576,24 @@ namespace ManWellNotes
             return panel;
         }
 
-        private Text Label(string value, Transform parent, int size, FontStyle style, Color color)
+        private TMP_Text Label(string value, Transform parent, int size, FontStyles style, Color color)
         {
-            GameObject label = new GameObject("Text", typeof(RectTransform), typeof(CanvasRenderer), typeof(Text));
+            GameObject label = new GameObject("Text", typeof(RectTransform), typeof(CanvasRenderer), typeof(TextMeshProUGUI));
             label.transform.SetParent(parent, false);
-            Text text = label.GetComponent<Text>();
+            TMP_Text text = label.GetComponent<TMP_Text>();
             text.font = font;
             text.fontSize = size;
             text.fontStyle = style;
             text.color = color;
             text.text = value;
-            text.alignment = TextAnchor.MiddleLeft;
-            text.horizontalOverflow = HorizontalWrapMode.Wrap;
-            text.verticalOverflow = VerticalWrapMode.Truncate;
+            text.alignment = TextAlignmentOptions.MidlineLeft;
+            text.textWrappingMode = TextWrappingModes.Normal;
+            text.overflowMode = TextOverflowModes.Truncate;
             text.raycastTarget = false;
             return text;
         }
 
-        private Button CreateButton(string label, Transform parent, Color background, Color foreground, int size, FontStyle style)
+        private Button CreateButton(string label, Transform parent, Color background, Color foreground, int size, FontStyles style)
         {
             GameObject buttonObject = Panel(label, parent, background);
             Button button = buttonObject.AddComponent<Button>();
@@ -578,34 +605,35 @@ namespace ManWellNotes
             colors.selectedColor = colors.highlightedColor;
             button.colors = colors;
 
-            Text text = Label(label, buttonObject.transform, size, style, foreground);
+            TMP_Text text = Label(label, buttonObject.transform, size, style, foreground);
             Stretch(text.rectTransform, 14f, 14f, 0f, 0f);
-            text.alignment = TextAnchor.MiddleLeft;
+            text.alignment = TextAlignmentOptions.MidlineLeft;
 
             buttonObject.AddComponent<LayoutElement>();
             return button;
         }
 
-        private InputField CreateInput(string placeholderValue, Transform parent, int size, bool multiline)
+        private TMP_InputField CreateInput(string placeholderValue, Transform parent, int size, bool multiline)
         {
             GameObject inputObject = Panel(placeholderValue, parent, Soft);
-            InputField input = inputObject.AddComponent<InputField>();
-            input.lineType = multiline ? InputField.LineType.MultiLineNewline : InputField.LineType.SingleLine;
-            input.contentType = multiline ? InputField.ContentType.Standard : InputField.ContentType.Standard;
+            TMP_InputField input = inputObject.AddComponent<TMP_InputField>();
+            input.lineType = multiline ? TMP_InputField.LineType.MultiLineNewline : TMP_InputField.LineType.SingleLine;
+            input.contentType = TMP_InputField.ContentType.Standard;
+            input.textViewport = inputObject.GetComponent<RectTransform>();
             input.caretColor = Ink;
             input.selectionColor = new Color32(170, 170, 170, 120);
             input.customCaretColor = true;
 
-            Text text = Label(string.Empty, inputObject.transform, size, FontStyle.Normal, Ink);
+            TMP_Text text = Label(string.Empty, inputObject.transform, size, FontStyles.Normal, Ink);
             Stretch(text.rectTransform, multiline ? 4f : 14f, 10f, multiline ? 8f : 5f, 5f);
-            text.alignment = multiline ? TextAnchor.UpperLeft : TextAnchor.MiddleLeft;
-            text.verticalOverflow = multiline ? VerticalWrapMode.Overflow : VerticalWrapMode.Truncate;
-            text.supportRichText = false;
+            text.alignment = multiline ? TextAlignmentOptions.TopLeft : TextAlignmentOptions.MidlineLeft;
+            text.overflowMode = multiline ? TextOverflowModes.Overflow : TextOverflowModes.Truncate;
+            text.richText = false;
 
-            Text placeholder = Label(placeholderValue, inputObject.transform, size, FontStyle.Normal, new Color32(145, 145, 145, 255));
+            TMP_Text placeholder = Label(placeholderValue, inputObject.transform, size, FontStyles.Normal, new Color32(145, 145, 145, 255));
             Stretch(placeholder.rectTransform, multiline ? 4f : 14f, 10f, multiline ? 8f : 5f, 5f);
-            placeholder.alignment = multiline ? TextAnchor.UpperLeft : TextAnchor.MiddleLeft;
-            placeholder.fontStyle = placeholderValue == "Title" ? FontStyle.Bold : FontStyle.Normal;
+            placeholder.alignment = multiline ? TextAlignmentOptions.TopLeft : TextAlignmentOptions.MidlineLeft;
+            placeholder.fontStyle = placeholderValue == "Title" ? FontStyles.Bold : FontStyles.Normal;
 
             input.textComponent = text;
             input.placeholder = placeholder;
