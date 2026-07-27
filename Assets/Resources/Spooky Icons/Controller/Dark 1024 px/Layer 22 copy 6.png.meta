@@ -1,0 +1,1157 @@
+fileFormatVersion: 2
+guid: 213eb88ac6a09c142821f0455ebb94a6
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8776495260163684930
+    second: Layer 22 copy 6_0
+  - first:
+      213: 403181654544783243
+    second: Layer 22 copy 6_1
+  - first:
+      213: -231141389325386739
+    second: Layer 22 copy 6_2
+  - first:
+      213: -6691306236825996816
+    second: Layer 22 copy 6_3
+  - first:
+      213: 7006740012241283930
+    second: Layer 22 copy 6_4
+  - first:
+      213: 6848926697977791254
+    second: Layer 22 copy 6_5
+  - first:
+      213: -6292028053751952988
+    second: Layer 22 copy 6_6
+  - first:
+      213: -7837568334469207196
+    second: Layer 22 copy 6_7
+  - first:
+      213: 1149288120335315320
+    second: Layer 22 copy 6_8
+  - first:
+      213: -7331813834157513524
+    second: Layer 22 copy 6_9
+  - first:
+      213: -1965060527084341613
+    second: Layer 22 copy 6_10
+  - first:
+      213: -7211594149110129848
+    second: Layer 22 copy 6_11
+  - first:
+      213: -5202717128267337681
+    second: Layer 22 copy 6_12
+  - first:
+      213: 8137625103888062580
+    second: Layer 22 copy 6_13
+  - first:
+      213: 7622801443631830398
+    second: Layer 22 copy 6_14
+  - first:
+      213: 4468692402720043519
+    second: Layer 22 copy 6_15
+  - first:
+      213: 7666740486612179040
+    second: Layer 22 copy 6_16
+  - first:
+      213: -5663068341090380540
+    second: Layer 22 copy 6_17
+  - first:
+      213: -8988674633723434898
+    second: Layer 22 copy 6_18
+  - first:
+      213: 3905348368531698657
+    second: Layer 22 copy 6_19
+  - first:
+      213: -3160557461869555460
+    second: Layer 22 copy 6_20
+  - first:
+      213: -2593772110459167400
+    second: Layer 22 copy 6_21
+  - first:
+      213: 2114866282089142038
+    second: Layer 22 copy 6_22
+  - first:
+      213: -5215464876229432730
+    second: Layer 22 copy 6_23
+  - first:
+      213: -2092789152992870584
+    second: Layer 22 copy 6_24
+  - first:
+      213: -2845590659192038064
+    second: Layer 22 copy 6_25
+  - first:
+      213: -619410352536906060
+    second: Layer 22 copy 6_26
+  - first:
+      213: -7143335867344255393
+    second: Layer 22 copy 6_27
+  - first:
+      213: -931798763478567867
+    second: Layer 22 copy 6_28
+  - first:
+      213: 2219588560580784028
+    second: Layer 22 copy 6_29
+  - first:
+      213: 1546413887256391218
+    second: Layer 22 copy 6_30
+  - first:
+      213: -8870400179984559081
+    second: Layer 22 copy 6_31
+  - first:
+      213: 3371000638359188639
+    second: Layer 22 copy 6_32
+  - first:
+      213: -6245331667030519934
+    second: Layer 22 copy 6_33
+  - first:
+      213: 5762545536172421923
+    second: Layer 22 copy 6_34
+  - first:
+      213: -44919722068565643
+    second: Layer 22 copy 6_35
+  - first:
+      213: -7017004193384360825
+    second: Layer 22 copy 6_36
+  - first:
+      213: 5523407339433521775
+    second: Layer 22 copy 6_37
+  - first:
+      213: -3609512754637018232
+    second: Layer 22 copy 6_38
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Layer 22 copy 6_0
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 556
+        width: 385
+        height: 485
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 24ab4f270ff5cc970800000000000000
+      internalID: 8776495260163684930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_1
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 1035
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8798132493689500800000000000000
+      internalID: 403181654544783243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_2
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 1033
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0cbe5c8122daccf0800000000000000
+      internalID: -231141389325386739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_3
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 1036
+        width: 13
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0f171aefd64b323a0800000000000000
+      internalID: -6691306236825996816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_4
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 1033
+        width: 18
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5b6827fae0fc3160800000000000000
+      internalID: 7006740012241283930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_5
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 1032
+        width: 42
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 613c7ad6b864c0f50800000000000000
+      internalID: 6848926697977791254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_6
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 1033
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a9825b52d93ea8a0800000000000000
+      internalID: -6292028053751952988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_7
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 882
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46bec11002d5b3390800000000000000
+      internalID: -7837568334469207196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_8
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 874
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 871b92dc47713ff00800000000000000
+      internalID: 1149288120335315320
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_9
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 794
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc42fb7d92a204a90800000000000000
+      internalID: -7331813834157513524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 723
+        height: 720
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 396fef8acd3bab4e0800000000000000
+      internalID: -1965060527084341613
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_11
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 711
+        width: 153
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84b510e74554beb90800000000000000
+      internalID: -7211594149110129848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_12
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 714
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f20f8c6465c3cc7b0800000000000000
+      internalID: -5202717128267337681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_13
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 717
+        width: 19
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4789c80cae6aee070800000000000000
+      internalID: 8137625103888062580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_14
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 713
+        width: 26
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e7592019681a9c960800000000000000
+      internalID: 7622801443631830398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_15
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 348
+        width: 489
+        height: 372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff17d9a601cf30e30800000000000000
+      internalID: 4468692402720043519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_16
+      rect:
+        serializedVersion: 2
+        x: 763
+        y: 713
+        width: 26
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 068df993adbb56a60800000000000000
+      internalID: 7666740486612179040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_17
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 717
+        width: 19
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4051c86195db861b0800000000000000
+      internalID: -5663068341090380540
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_18
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 714
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e68a95f6b00d14380800000000000000
+      internalID: -8988674633723434898
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_19
+      rect:
+        serializedVersion: 2
+        x: 837
+        y: 711
+        width: 153
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e3bb7656a5923630800000000000000
+      internalID: 3905348368531698657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 583
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cf01e09dbb17324d0800000000000000
+      internalID: -3160557461869555460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_21
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 573
+        width: 9
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 85d14c70202110cd0800000000000000
+      internalID: -2593772110459167400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_22
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 567
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 617df53bda3895d10800000000000000
+      internalID: 2114866282089142038
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_23
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 555
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66a61d9e352fe97b0800000000000000
+      internalID: -5215464876229432730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 524
+        width: 6
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 84fb11a7a5be4f2e0800000000000000
+      internalID: -2092789152992870584
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_25
+      rect:
+        serializedVersion: 2
+        x: 1054
+        y: 528
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05d50be3f5e6288d0800000000000000
+      internalID: -2845590659192038064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 495
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b696dee0996767f0800000000000000
+      internalID: -619410352536906060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_27
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 512
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5683ab20e5cddc90800000000000000
+      internalID: -7143335867344255393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_28
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 477
+        width: 9
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54436b426f59113f0800000000000000
+      internalID: -931798763478567867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_29
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 440
+        width: 8
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9f20f439009dce10800000000000000
+      internalID: 2219588560580784028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_30
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 477
+        width: 6
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23ee5a9bc37f57510800000000000000
+      internalID: 1546413887256391218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_31
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 440
+        width: 8
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7149570a80206e480800000000000000
+      internalID: -8870400179984559081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_32
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 427
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f94b303683338ce20800000000000000
+      internalID: 3371000638359188639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_33
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 241
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28fc52220ff1459a0800000000000000
+      internalID: -6245331667030519934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_34
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 169
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 323f19542aca8ff40800000000000000
+      internalID: 5762545536172421923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_35
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 161
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 571a1b230c9606ff0800000000000000
+      internalID: -44919722068565643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_36
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 152
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78416e12dd79e9e90800000000000000
+      internalID: -7017004193384360825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_37
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 2
+        width: 36
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6278b006b517ac40800000000000000
+      internalID: 5523407339433521775
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 22 copy 6_38
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 0
+        width: 24
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88b6e9f064f68edc0800000000000000
+      internalID: -3609512754637018232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Layer 22 copy 6_0: 8776495260163684930
+      Layer 22 copy 6_1: 403181654544783243
+      Layer 22 copy 6_10: -1965060527084341613
+      Layer 22 copy 6_11: -7211594149110129848
+      Layer 22 copy 6_12: -5202717128267337681
+      Layer 22 copy 6_13: 8137625103888062580
+      Layer 22 copy 6_14: 7622801443631830398
+      Layer 22 copy 6_15: 4468692402720043519
+      Layer 22 copy 6_16: 7666740486612179040
+      Layer 22 copy 6_17: -5663068341090380540
+      Layer 22 copy 6_18: -8988674633723434898
+      Layer 22 copy 6_19: 3905348368531698657
+      Layer 22 copy 6_2: -231141389325386739
+      Layer 22 copy 6_20: -3160557461869555460
+      Layer 22 copy 6_21: -2593772110459167400
+      Layer 22 copy 6_22: 2114866282089142038
+      Layer 22 copy 6_23: -5215464876229432730
+      Layer 22 copy 6_24: -2092789152992870584
+      Layer 22 copy 6_25: -2845590659192038064
+      Layer 22 copy 6_26: -619410352536906060
+      Layer 22 copy 6_27: -7143335867344255393
+      Layer 22 copy 6_28: -931798763478567867
+      Layer 22 copy 6_29: 2219588560580784028
+      Layer 22 copy 6_3: -6691306236825996816
+      Layer 22 copy 6_30: 1546413887256391218
+      Layer 22 copy 6_31: -8870400179984559081
+      Layer 22 copy 6_32: 3371000638359188639
+      Layer 22 copy 6_33: -6245331667030519934
+      Layer 22 copy 6_34: 5762545536172421923
+      Layer 22 copy 6_35: -44919722068565643
+      Layer 22 copy 6_36: -7017004193384360825
+      Layer 22 copy 6_37: 5523407339433521775
+      Layer 22 copy 6_38: -3609512754637018232
+      Layer 22 copy 6_4: 7006740012241283930
+      Layer 22 copy 6_5: 6848926697977791254
+      Layer 22 copy 6_6: -6292028053751952988
+      Layer 22 copy 6_7: -7837568334469207196
+      Layer 22 copy 6_8: 1149288120335315320
+      Layer 22 copy 6_9: -7331813834157513524
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

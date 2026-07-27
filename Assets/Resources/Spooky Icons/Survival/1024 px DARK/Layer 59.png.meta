@@ -1,0 +1,689 @@
+fileFormatVersion: 2
+guid: 5b7cac1f4792d684996705ae9248de47
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 5523563217492281482
+    second: Layer 59_0
+  - first:
+      213: 6006813472634824515
+    second: Layer 59_1
+  - first:
+      213: 4584689243229426353
+    second: Layer 59_2
+  - first:
+      213: 1001442175572912136
+    second: Layer 59_3
+  - first:
+      213: -9071024276772833556
+    second: Layer 59_4
+  - first:
+      213: -3003573202085458107
+    second: Layer 59_5
+  - first:
+      213: 7379107975617290168
+    second: Layer 59_6
+  - first:
+      213: 8065051893821660674
+    second: Layer 59_7
+  - first:
+      213: -3335258723198862934
+    second: Layer 59_8
+  - first:
+      213: -384985826114090465
+    second: Layer 59_9
+  - first:
+      213: -2047302319312020265
+    second: Layer 59_10
+  - first:
+      213: -4213865942248574285
+    second: Layer 59_11
+  - first:
+      213: -7225275208721591787
+    second: Layer 59_12
+  - first:
+      213: -1501113003292494785
+    second: Layer 59_13
+  - first:
+      213: -4681614735592316366
+    second: Layer 59_14
+  - first:
+      213: -6125262915010051327
+    second: Layer 59_15
+  - first:
+      213: -6411344214185104225
+    second: Layer 59_16
+  - first:
+      213: 4115904747235242168
+    second: Layer 59_17
+  - first:
+      213: 5454870836635078649
+    second: Layer 59_18
+  - first:
+      213: 8079424042439187079
+    second: Layer 59_19
+  - first:
+      213: -3154278761548036282
+    second: Layer 59_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Layer 59_0
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 548
+        width: 506
+        height: 401
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a888a013b73a7ac40800000000000000
+      internalID: 5523563217492281482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_1
+      rect:
+        serializedVersion: 2
+        x: 387
+        y: 316
+        width: 260
+        height: 236
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 347ed64270d7c5350800000000000000
+      internalID: 6006813472634824515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_2
+      rect:
+        serializedVersion: 2
+        x: 466
+        y: 549
+        width: 27
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b29e34739610af30800000000000000
+      internalID: 4584689243229426353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_3
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 492
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8082e125a56d5ed00800000000000000
+      internalID: 1001442175572912136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_4
+      rect:
+        serializedVersion: 2
+        x: 743
+        y: 504
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce6b20a0b7f3d1280800000000000000
+      internalID: -9071024276772833556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_5
+      rect:
+        serializedVersion: 2
+        x: 748
+        y: 499
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54f40d8161a2156d0800000000000000
+      internalID: -3003573202085458107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 437
+        height: 500
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bf9bed8b9bd76660800000000000000
+      internalID: 7379107975617290168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_7
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 488
+        width: 9
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20ed45a87f1dcef60800000000000000
+      internalID: 8065051893821660674
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_8
+      rect:
+        serializedVersion: 2
+        x: 324
+        y: 495
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa975b9bcd7c6b1d0800000000000000
+      internalID: -3335258723198862934
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_9
+      rect:
+        serializedVersion: 2
+        x: 576
+        y: 24
+        width: 472
+        height: 471
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1ac8ee4e6148aaf0800000000000000
+      internalID: -384985826114090465
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_10
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 490
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7dcd29d33658693e0800000000000000
+      internalID: -2047302319312020265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_11
+      rect:
+        serializedVersion: 2
+        x: 769
+        y: 494
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b2382560475585c0800000000000000
+      internalID: -4213865942248574285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_12
+      rect:
+        serializedVersion: 2
+        x: 775
+        y: 493
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51296b39a7aaabb90800000000000000
+      internalID: -7225275208721591787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_13
+      rect:
+        serializedVersion: 2
+        x: 849
+        y: 492
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f34f70f3da9fa2be0800000000000000
+      internalID: -1501113003292494785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_14
+      rect:
+        serializedVersion: 2
+        x: 854
+        y: 492
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23229c5c330970fb0800000000000000
+      internalID: -4681614735592316366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_15
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 265
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 103c3f2f4d1befaa0800000000000000
+      internalID: -6125262915010051327
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_16
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 252
+        width: 11
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9cadbce7645607a0800000000000000
+      internalID: -6411344214185104225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_17
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 242
+        width: 21
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b0fc448f81ae1930800000000000000
+      internalID: 4115904747235242168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_18
+      rect:
+        serializedVersion: 2
+        x: 433
+        y: 210
+        width: 10
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ff8541ff1893bb40800000000000000
+      internalID: 5454870836635078649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_19
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 18
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78a96572c51ef1070800000000000000
+      internalID: 8079424042439187079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 59_20
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 21
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 647ce5fad20c934d0800000000000000
+      internalID: -3154278761548036282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Layer 59_0: 5523563217492281482
+      Layer 59_1: 6006813472634824515
+      Layer 59_10: -2047302319312020265
+      Layer 59_11: -4213865942248574285
+      Layer 59_12: -7225275208721591787
+      Layer 59_13: -1501113003292494785
+      Layer 59_14: -4681614735592316366
+      Layer 59_15: -6125262915010051327
+      Layer 59_16: -6411344214185104225
+      Layer 59_17: 4115904747235242168
+      Layer 59_18: 5454870836635078649
+      Layer 59_19: 8079424042439187079
+      Layer 59_2: 4584689243229426353
+      Layer 59_20: -3154278761548036282
+      Layer 59_3: 1001442175572912136
+      Layer 59_4: -9071024276772833556
+      Layer 59_5: -3003573202085458107
+      Layer 59_6: 7379107975617290168
+      Layer 59_7: 8065051893821660674
+      Layer 59_8: -3335258723198862934
+      Layer 59_9: -384985826114090465
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

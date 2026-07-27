@@ -1,0 +1,689 @@
+fileFormatVersion: 2
+guid: a99ebf4fcb3aa9f4699a1dfcbb6de2a0
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8529332974136115570
+    second: Layer 33_0
+  - first:
+      213: 2343283748894499492
+    second: Layer 33_1
+  - first:
+      213: -936922158744968817
+    second: Layer 33_2
+  - first:
+      213: -6504055719947972838
+    second: Layer 33_3
+  - first:
+      213: -5370945498396537178
+    second: Layer 33_4
+  - first:
+      213: -7313878367827626907
+    second: Layer 33_5
+  - first:
+      213: 554849680872875138
+    second: Layer 33_6
+  - first:
+      213: -502150542885016024
+    second: Layer 33_7
+  - first:
+      213: 5769843508219872443
+    second: Layer 33_8
+  - first:
+      213: 6994695718586661632
+    second: Layer 33_9
+  - first:
+      213: -6323367582381152433
+    second: Layer 33_10
+  - first:
+      213: 8574355052931415792
+    second: Layer 33_11
+  - first:
+      213: -4713331433130724776
+    second: Layer 33_12
+  - first:
+      213: -7996136368255358367
+    second: Layer 33_13
+  - first:
+      213: -3910767880909260947
+    second: Layer 33_14
+  - first:
+      213: -1895202166778633028
+    second: Layer 33_15
+  - first:
+      213: -8814117147637505844
+    second: Layer 33_16
+  - first:
+      213: 1906649428756875404
+    second: Layer 33_17
+  - first:
+      213: -6995523446497459191
+    second: Layer 33_18
+  - first:
+      213: 8904032874953158807
+    second: Layer 33_19
+  - first:
+      213: 5154700341030819852
+    second: Layer 33_20
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Layer 33_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 804
+        height: 1063
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 271c86e46274e5670800000000000000
+      internalID: 8529332974136115570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_1
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 1056
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a26dc48724058020800000000000000
+      internalID: 2343283748894499492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_2
+      rect:
+        serializedVersion: 2
+        x: 302
+        y: 1055
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8160d9b2426ff2f0800000000000000
+      internalID: -936922158744968817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_3
+      rect:
+        serializedVersion: 2
+        x: 402
+        y: 1051
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1f472d58c3fcb5a0800000000000000
+      internalID: -6504055719947972838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_4
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 1051
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6ae471496819675b0800000000000000
+      internalID: -5370945498396537178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_5
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 1050
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56478330062ef7a90800000000000000
+      internalID: -7313878367827626907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_6
+      rect:
+        serializedVersion: 2
+        x: 495
+        y: 1051
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 284aa2458d833b700800000000000000
+      internalID: 554849680872875138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_7
+      rect:
+        serializedVersion: 2
+        x: 501
+        y: 1049
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82ea193edb00809f0800000000000000
+      internalID: -502150542885016024
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_8
+      rect:
+        serializedVersion: 2
+        x: 511
+        y: 1050
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb40a0dc91a921050800000000000000
+      internalID: 5769843508219872443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_9
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 1049
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 00bbd4252b6221160800000000000000
+      internalID: 6994695718586661632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_10
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 1049
+        width: 17
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4763fbbfa2ee38a0800000000000000
+      internalID: -6323367582381152433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_11
+      rect:
+        serializedVersion: 2
+        x: 539
+        y: 1048
+        width: 18
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fe7d04ed7a3ef670800000000000000
+      internalID: 8574355052931415792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_12
+      rect:
+        serializedVersion: 2
+        x: 584
+        y: 1049
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8527f8ba802e69eb0800000000000000
+      internalID: -4713331433130724776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_13
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 1048
+        width: 12
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 16aae82a654080190800000000000000
+      internalID: -7996136368255358367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_14
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 1048
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d67756b15592ab9c0800000000000000
+      internalID: -3910767880909260947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_15
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 1048
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb4eb97aba3e2b5e0800000000000000
+      internalID: -1895202166778633028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_16
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 1045
+        width: 12
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc023664727fda580800000000000000
+      internalID: -8814117147637505844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_17
+      rect:
+        serializedVersion: 2
+        x: 617
+        y: 1047
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c884148bd87c57a10800000000000000
+      internalID: 1906649428756875404
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_18
+      rect:
+        serializedVersion: 2
+        x: 782
+        y: 923
+        width: 8
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9044a914d78eaee90800000000000000
+      internalID: -6995523446497459191
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_19
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 901
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 790bbf369ba719b70800000000000000
+      internalID: 8904032874953158807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 33_20
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 880
+        width: 12
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c081abe36ac298740800000000000000
+      internalID: 5154700341030819852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Layer 33_0: 8529332974136115570
+      Layer 33_1: 2343283748894499492
+      Layer 33_10: -6323367582381152433
+      Layer 33_11: 8574355052931415792
+      Layer 33_12: -4713331433130724776
+      Layer 33_13: -7996136368255358367
+      Layer 33_14: -3910767880909260947
+      Layer 33_15: -1895202166778633028
+      Layer 33_16: -8814117147637505844
+      Layer 33_17: 1906649428756875404
+      Layer 33_18: -6995523446497459191
+      Layer 33_19: 8904032874953158807
+      Layer 33_2: -936922158744968817
+      Layer 33_20: 5154700341030819852
+      Layer 33_3: -6504055719947972838
+      Layer 33_4: -5370945498396537178
+      Layer 33_5: -7313878367827626907
+      Layer 33_6: 554849680872875138
+      Layer 33_7: -502150542885016024
+      Layer 33_8: 5769843508219872443
+      Layer 33_9: 6994695718586661632
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

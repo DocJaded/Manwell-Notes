@@ -1,0 +1,1157 @@
+fileFormatVersion: 2
+guid: 0777c8150ac6325499529c7af230071e
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3260367057922959245
+    second: Controller Icon 1024 px (61)_0
+  - first:
+      213: -3555287708547691928
+    second: Controller Icon 1024 px (61)_1
+  - first:
+      213: 5753522893363450048
+    second: Controller Icon 1024 px (61)_2
+  - first:
+      213: -659403701825918755
+    second: Controller Icon 1024 px (61)_3
+  - first:
+      213: -7444729216471022557
+    second: Controller Icon 1024 px (61)_4
+  - first:
+      213: -1260385349668838865
+    second: Controller Icon 1024 px (61)_5
+  - first:
+      213: 5445983110315784678
+    second: Controller Icon 1024 px (61)_6
+  - first:
+      213: 3648989228377262813
+    second: Controller Icon 1024 px (61)_7
+  - first:
+      213: -7855899346394164890
+    second: Controller Icon 1024 px (61)_8
+  - first:
+      213: -4268169038194053280
+    second: Controller Icon 1024 px (61)_9
+  - first:
+      213: -1473625896331811649
+    second: Controller Icon 1024 px (61)_10
+  - first:
+      213: 783127723758073552
+    second: Controller Icon 1024 px (61)_11
+  - first:
+      213: 8116616909487431665
+    second: Controller Icon 1024 px (61)_12
+  - first:
+      213: 5850671086073317216
+    second: Controller Icon 1024 px (61)_13
+  - first:
+      213: 5723582388785890061
+    second: Controller Icon 1024 px (61)_14
+  - first:
+      213: 2622490501506141980
+    second: Controller Icon 1024 px (61)_15
+  - first:
+      213: -6822963323075772148
+    second: Controller Icon 1024 px (61)_16
+  - first:
+      213: -2089682457716225456
+    second: Controller Icon 1024 px (61)_17
+  - first:
+      213: -9022068717651626325
+    second: Controller Icon 1024 px (61)_18
+  - first:
+      213: 1308543027376450578
+    second: Controller Icon 1024 px (61)_19
+  - first:
+      213: 758640638772760139
+    second: Controller Icon 1024 px (61)_20
+  - first:
+      213: 6536073274299446830
+    second: Controller Icon 1024 px (61)_21
+  - first:
+      213: -49379450052288196
+    second: Controller Icon 1024 px (61)_22
+  - first:
+      213: 8636120091070438479
+    second: Controller Icon 1024 px (61)_23
+  - first:
+      213: -7805394628918119103
+    second: Controller Icon 1024 px (61)_24
+  - first:
+      213: 3497386071961969498
+    second: Controller Icon 1024 px (61)_25
+  - first:
+      213: -3637319291935715400
+    second: Controller Icon 1024 px (61)_26
+  - first:
+      213: -1043238592859033413
+    second: Controller Icon 1024 px (61)_27
+  - first:
+      213: 8995917741102382297
+    second: Controller Icon 1024 px (61)_28
+  - first:
+      213: -1758354208106799171
+    second: Controller Icon 1024 px (61)_29
+  - first:
+      213: 6725806205029111443
+    second: Controller Icon 1024 px (61)_30
+  - first:
+      213: -5309827821191399745
+    second: Controller Icon 1024 px (61)_31
+  - first:
+      213: -3327971271388549706
+    second: Controller Icon 1024 px (61)_32
+  - first:
+      213: 4690699597760036530
+    second: Controller Icon 1024 px (61)_33
+  - first:
+      213: 5596373952316910842
+    second: Controller Icon 1024 px (61)_34
+  - first:
+      213: -172600784599407759
+    second: Controller Icon 1024 px (61)_35
+  - first:
+      213: -2934285654012747639
+    second: Controller Icon 1024 px (61)_36
+  - first:
+      213: -8457403747093072436
+    second: Controller Icon 1024 px (61)_37
+  - first:
+      213: 2369457928931657295
+    second: Controller Icon 1024 px (61)_38
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_0
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 556
+        width: 385
+        height: 485
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 378dd1b5f69d0c2d0800000000000000
+      internalID: -3260367057922959245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_1
+      rect:
+        serializedVersion: 2
+        x: 479
+        y: 1035
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86ac3b17aa419aec0800000000000000
+      internalID: -3555287708547691928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_2
+      rect:
+        serializedVersion: 2
+        x: 497
+        y: 1033
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c0910a869e98df40800000000000000
+      internalID: 5753522893363450048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_3
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 1036
+        width: 13
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd8a61da3d359d6f0800000000000000
+      internalID: -659403701825918755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_4
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 1033
+        width: 18
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 324c543b8320fa890800000000000000
+      internalID: -7444729216471022557
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_5
+      rect:
+        serializedVersion: 2
+        x: 593
+        y: 1032
+        width: 42
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f22e1e8c336328ee0800000000000000
+      internalID: -1260385349668838865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_6
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 1033
+        width: 10
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e93627e8c4049b40800000000000000
+      internalID: 5445983110315784678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_7
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 882
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dda47aabe50d3a230800000000000000
+      internalID: 3648989228377262813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_8
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 874
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 661d3f2ba2d3af290800000000000000
+      internalID: -7855899346394164890
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_9
+      rect:
+        serializedVersion: 2
+        x: 346
+        y: 794
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06f6f1d9fda64c4c0800000000000000
+      internalID: -4268169038194053280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 723
+        height: 720
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb4635d0e01ac8be0800000000000000
+      internalID: -1473625896331811649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_11
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 711
+        width: 153
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d63c5cf38a3eda00800000000000000
+      internalID: 783127723758073552
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_12
+      rect:
+        serializedVersion: 2
+        x: 223
+        y: 714
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ff5de3531404a070800000000000000
+      internalID: 8116616909487431665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_13
+      rect:
+        serializedVersion: 2
+        x: 237
+        y: 717
+        width: 19
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0678c07ca52c13150800000000000000
+      internalID: 5850671086073317216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_14
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 713
+        width: 26
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d03c3469bdf3e6f40800000000000000
+      internalID: 5723582388785890061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_15
+      rect:
+        serializedVersion: 2
+        x: 571
+        y: 348
+        width: 489
+        height: 372
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1f0c117735f46420800000000000000
+      internalID: 2622490501506141980
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_16
+      rect:
+        serializedVersion: 2
+        x: 763
+        y: 713
+        width: 26
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c01cc8cd107ff41a0800000000000000
+      internalID: -6822963323075772148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_17
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 717
+        width: 19
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05a857650e4fff2e0800000000000000
+      internalID: -2089682457716225456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_18
+      rect:
+        serializedVersion: 2
+        x: 829
+        y: 714
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba6f5316d4c2bc280800000000000000
+      internalID: -9022068717651626325
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_19
+      rect:
+        serializedVersion: 2
+        x: 837
+        y: 711
+        width: 153
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 21c661053f0e82210800000000000000
+      internalID: 1308543027376450578
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 583
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4ec93a34ab378a00800000000000000
+      internalID: 758640638772760139
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_21
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 573
+        width: 9
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e26fa8c630cc4ba50800000000000000
+      internalID: 6536073274299446830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_22
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 567
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c31ed6cd6a1905ff0800000000000000
+      internalID: -49379450052288196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_23
+      rect:
+        serializedVersion: 2
+        x: 1052
+        y: 555
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4c1ed97779a9d770800000000000000
+      internalID: 8636120091070438479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 524
+        width: 6
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 145f79390faada390800000000000000
+      internalID: -7805394628918119103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_25
+      rect:
+        serializedVersion: 2
+        x: 1054
+        y: 528
+        width: 6
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5321bd3a16398030800000000000000
+      internalID: 3497386071961969498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 495
+        width: 9
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bf0f751065a58dc0800000000000000
+      internalID: -3637319291935715400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_27
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 512
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb0b8a0f60ca581f0800000000000000
+      internalID: -1043238592859033413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_28
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 477
+        width: 9
+        height: 42
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dcba0be58be7dc70800000000000000
+      internalID: 8995917741102382297
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_29
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 440
+        width: 8
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbf1b74f9221997e0800000000000000
+      internalID: -1758354208106799171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_30
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 477
+        width: 6
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 396d0eecb1dd65d50800000000000000
+      internalID: 6725806205029111443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_31
+      rect:
+        serializedVersion: 2
+        x: 1051
+        y: 440
+        width: 8
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb67663bab3bf46b0800000000000000
+      internalID: -5309827821191399745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_32
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 427
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bd2e22d2cba0d1d0800000000000000
+      internalID: -3327971271388549706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_33
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 241
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2befd888e66b81140800000000000000
+      internalID: 4690699597760036530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_34
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 169
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afc291275705aad40800000000000000
+      internalID: 5596373952316910842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_35
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 161
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 173aff9308cca9df0800000000000000
+      internalID: -172600784599407759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_36
+      rect:
+        serializedVersion: 2
+        x: 716
+        y: 152
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 980ab038eb25747d0800000000000000
+      internalID: -2934285654012747639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_37
+      rect:
+        serializedVersion: 2
+        x: 431
+        y: 2
+        width: 36
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc5b57ce91441aa80800000000000000
+      internalID: -8457403747093072436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Controller Icon 1024 px (61)_38
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 0
+        width: 24
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f464434be6102e020800000000000000
+      internalID: 2369457928931657295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Controller Icon 1024 px (61)_0: -3260367057922959245
+      Controller Icon 1024 px (61)_1: -3555287708547691928
+      Controller Icon 1024 px (61)_10: -1473625896331811649
+      Controller Icon 1024 px (61)_11: 783127723758073552
+      Controller Icon 1024 px (61)_12: 8116616909487431665
+      Controller Icon 1024 px (61)_13: 5850671086073317216
+      Controller Icon 1024 px (61)_14: 5723582388785890061
+      Controller Icon 1024 px (61)_15: 2622490501506141980
+      Controller Icon 1024 px (61)_16: -6822963323075772148
+      Controller Icon 1024 px (61)_17: -2089682457716225456
+      Controller Icon 1024 px (61)_18: -9022068717651626325
+      Controller Icon 1024 px (61)_19: 1308543027376450578
+      Controller Icon 1024 px (61)_2: 5753522893363450048
+      Controller Icon 1024 px (61)_20: 758640638772760139
+      Controller Icon 1024 px (61)_21: 6536073274299446830
+      Controller Icon 1024 px (61)_22: -49379450052288196
+      Controller Icon 1024 px (61)_23: 8636120091070438479
+      Controller Icon 1024 px (61)_24: -7805394628918119103
+      Controller Icon 1024 px (61)_25: 3497386071961969498
+      Controller Icon 1024 px (61)_26: -3637319291935715400
+      Controller Icon 1024 px (61)_27: -1043238592859033413
+      Controller Icon 1024 px (61)_28: 8995917741102382297
+      Controller Icon 1024 px (61)_29: -1758354208106799171
+      Controller Icon 1024 px (61)_3: -659403701825918755
+      Controller Icon 1024 px (61)_30: 6725806205029111443
+      Controller Icon 1024 px (61)_31: -5309827821191399745
+      Controller Icon 1024 px (61)_32: -3327971271388549706
+      Controller Icon 1024 px (61)_33: 4690699597760036530
+      Controller Icon 1024 px (61)_34: 5596373952316910842
+      Controller Icon 1024 px (61)_35: -172600784599407759
+      Controller Icon 1024 px (61)_36: -2934285654012747639
+      Controller Icon 1024 px (61)_37: -8457403747093072436
+      Controller Icon 1024 px (61)_38: 2369457928931657295
+      Controller Icon 1024 px (61)_4: -7444729216471022557
+      Controller Icon 1024 px (61)_5: -1260385349668838865
+      Controller Icon 1024 px (61)_6: 5445983110315784678
+      Controller Icon 1024 px (61)_7: 3648989228377262813
+      Controller Icon 1024 px (61)_8: -7855899346394164890
+      Controller Icon 1024 px (61)_9: -4268169038194053280
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

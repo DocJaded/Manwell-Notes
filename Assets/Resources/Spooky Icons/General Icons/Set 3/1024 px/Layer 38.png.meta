@@ -1,0 +1,1105 @@
+fileFormatVersion: 2
+guid: e889a549b3a7745408c28cec8779e3b2
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8260516312191274085
+    second: Layer 38_0
+  - first:
+      213: 6769101869319253510
+    second: Layer 38_1
+  - first:
+      213: 4582587071238036706
+    second: Layer 38_2
+  - first:
+      213: 6552009399834757968
+    second: Layer 38_3
+  - first:
+      213: -8703013245569116882
+    second: Layer 38_4
+  - first:
+      213: 1078959284466414525
+    second: Layer 38_5
+  - first:
+      213: -561177254197802416
+    second: Layer 38_6
+  - first:
+      213: 633811473501516715
+    second: Layer 38_7
+  - first:
+      213: 1503305210580306114
+    second: Layer 38_8
+  - first:
+      213: 7083627876682031889
+    second: Layer 38_9
+  - first:
+      213: -7633934916293428314
+    second: Layer 38_10
+  - first:
+      213: -7682864514591685909
+    second: Layer 38_11
+  - first:
+      213: -774603878134204779
+    second: Layer 38_12
+  - first:
+      213: 7715579007210686212
+    second: Layer 38_13
+  - first:
+      213: -7084669071458338696
+    second: Layer 38_14
+  - first:
+      213: -3032409827420009614
+    second: Layer 38_15
+  - first:
+      213: 5750113384337079841
+    second: Layer 38_16
+  - first:
+      213: 1484960215551444756
+    second: Layer 38_17
+  - first:
+      213: -5121640708024979452
+    second: Layer 38_18
+  - first:
+      213: -3985601886329073961
+    second: Layer 38_19
+  - first:
+      213: 7541146195396649251
+    second: Layer 38_20
+  - first:
+      213: 3232357123447830750
+    second: Layer 38_21
+  - first:
+      213: 5164439553161710375
+    second: Layer 38_22
+  - first:
+      213: -4518805837632286140
+    second: Layer 38_23
+  - first:
+      213: -3998259470868952878
+    second: Layer 38_24
+  - first:
+      213: 3343124128258765990
+    second: Layer 38_25
+  - first:
+      213: 6054265747176052316
+    second: Layer 38_26
+  - first:
+      213: -2869527493830215589
+    second: Layer 38_27
+  - first:
+      213: 5988766448031924974
+    second: Layer 38_28
+  - first:
+      213: -9127663509371345307
+    second: Layer 38_29
+  - first:
+      213: -5585242466897077081
+    second: Layer 38_30
+  - first:
+      213: -895191543358946659
+    second: Layer 38_31
+  - first:
+      213: 6782358517222256931
+    second: Layer 38_32
+  - first:
+      213: -2484935342461928017
+    second: Layer 38_33
+  - first:
+      213: 7073670352139504269
+    second: Layer 38_34
+  - first:
+      213: 942533452017169449
+    second: Layer 38_35
+  - first:
+      213: -7753100693065522818
+    second: Layer 38_36
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: iOS
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Layer 38_0
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 513
+        width: 867
+        height: 549
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56c0b71e1df33a270800000000000000
+      internalID: 8260516312191274085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_1
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 1048
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 60ee431394ea0fd50800000000000000
+      internalID: 6769101869319253510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_2
+      rect:
+        serializedVersion: 2
+        x: 558
+        y: 1049
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ecd07569ae989f30800000000000000
+      internalID: 4582587071238036706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 538
+        width: 313
+        height: 423
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05bcb2ac5d96dea50800000000000000
+      internalID: 6552009399834757968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 542
+        height: 541
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e25555e409fa83780800000000000000
+      internalID: -8703013245569116882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_5
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 529
+        width: 12
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db3fabda0cb39fe00800000000000000
+      internalID: 1078959284466414525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_6
+      rect:
+        serializedVersion: 2
+        x: 532
+        y: 0
+        width: 362
+        height: 538
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05ac283b24c4638f0800000000000000
+      internalID: -561177254197802416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_7
+      rect:
+        serializedVersion: 2
+        x: 626
+        y: 531
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba3ff945d20cbc800800000000000000
+      internalID: 633811473501516715
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_8
+      rect:
+        serializedVersion: 2
+        x: 659
+        y: 530
+        width: 9
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c802a9cf10dcd410800000000000000
+      internalID: 1503305210580306114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_9
+      rect:
+        serializedVersion: 2
+        x: 694
+        y: 530
+        width: 14
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 113efaee50a1e4260800000000000000
+      internalID: 7083627876682031889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_10
+      rect:
+        serializedVersion: 2
+        x: 809
+        y: 529
+        width: 11
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6abf0e3d3a0de0690800000000000000
+      internalID: -7633934916293428314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_11
+      rect:
+        serializedVersion: 2
+        x: 852
+        y: 532
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be20f46fd6bf06590800000000000000
+      internalID: -7682864514591685909
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_12
+      rect:
+        serializedVersion: 2
+        x: 857
+        y: 528
+        width: 16
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 596bb2a70ed0045f0800000000000000
+      internalID: -774603878134204779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_13
+      rect:
+        serializedVersion: 2
+        x: 892
+        y: 531
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40701496a3e331b60800000000000000
+      internalID: 7715579007210686212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_14
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 532
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 878778404033ead90800000000000000
+      internalID: -7084669071458338696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_15
+      rect:
+        serializedVersion: 2
+        x: 928
+        y: 527
+        width: 12
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 27b0a3f0457bae5d0800000000000000
+      internalID: -3032409827420009614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_16
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 531
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12e71ab58a18ccf40800000000000000
+      internalID: 5750113384337079841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_17
+      rect:
+        serializedVersion: 2
+        x: 976
+        y: 528
+        width: 11
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4170889c273ab9410800000000000000
+      internalID: 1484960215551444756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_18
+      rect:
+        serializedVersion: 2
+        x: 1010
+        y: 531
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 400bdf269e64ce8b0800000000000000
+      internalID: -5121640708024979452
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_19
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 530
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7de8a35733c40b8c0800000000000000
+      internalID: -3985601886329073961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_20
+      rect:
+        serializedVersion: 2
+        x: 602
+        y: 529
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 321e7ef828887a860800000000000000
+      internalID: 7541146195396649251
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_21
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 529
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed8bf429da3abdc20800000000000000
+      internalID: 3232357123447830750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_22
+      rect:
+        serializedVersion: 2
+        x: 680
+        y: 529
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72b4e264966cba740800000000000000
+      internalID: 5164439553161710375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_23
+      rect:
+        serializedVersion: 2
+        x: 754
+        y: 114
+        width: 307
+        height: 422
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44257f6480af941c0800000000000000
+      internalID: -4518805837632286140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_24
+      rect:
+        serializedVersion: 2
+        x: 791
+        y: 529
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d8c307e1345388c0800000000000000
+      internalID: -3998259470868952878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_25
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 530
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6a4b6e89ea9256e20800000000000000
+      internalID: 3343124128258765990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_26
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 530
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c565e34ce92150450800000000000000
+      internalID: 6054265747176052316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_27
+      rect:
+        serializedVersion: 2
+        x: 830
+        y: 527
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b587801a2f36d28d0800000000000000
+      internalID: -2869527493830215589
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_28
+      rect:
+        serializedVersion: 2
+        x: 871
+        y: 528
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ee288b9ca5f5c1350800000000000000
+      internalID: 5988766448031924974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_29
+      rect:
+        serializedVersion: 2
+        x: 910
+        y: 529
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56620ae0666045180800000000000000
+      internalID: -9127663509371345307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_30
+      rect:
+        serializedVersion: 2
+        x: 922
+        y: 528
+        width: 7
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ac5c28719b3d72b0800000000000000
+      internalID: -5585242466897077081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_31
+      rect:
+        serializedVersion: 2
+        x: 939
+        y: 530
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d920824c804a393f0800000000000000
+      internalID: -895191543358946659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_32
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 528
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 321b06e0327cf1e50800000000000000
+      internalID: 6782358517222256931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_33
+      rect:
+        serializedVersion: 2
+        x: 997
+        y: 530
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fad3eb6c87cb38dd0800000000000000
+      internalID: -2484935342461928017
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_34
+      rect:
+        serializedVersion: 2
+        x: 898
+        y: 135
+        width: 14
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8acc7515b9ba2260800000000000000
+      internalID: 7073670352139504269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_35
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 117
+        width: 11
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 924f76c4e2d841d00800000000000000
+      internalID: 942533452017169449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Layer 38_36
+      rect:
+        serializedVersion: 2
+        x: 880
+        y: 81
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e71aef15ff3776490800000000000000
+      internalID: -7753100693065522818
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Layer 38_0: 8260516312191274085
+      Layer 38_1: 6769101869319253510
+      Layer 38_10: -7633934916293428314
+      Layer 38_11: -7682864514591685909
+      Layer 38_12: -774603878134204779
+      Layer 38_13: 7715579007210686212
+      Layer 38_14: -7084669071458338696
+      Layer 38_15: -3032409827420009614
+      Layer 38_16: 5750113384337079841
+      Layer 38_17: 1484960215551444756
+      Layer 38_18: -5121640708024979452
+      Layer 38_19: -3985601886329073961
+      Layer 38_2: 4582587071238036706
+      Layer 38_20: 7541146195396649251
+      Layer 38_21: 3232357123447830750
+      Layer 38_22: 5164439553161710375
+      Layer 38_23: -4518805837632286140
+      Layer 38_24: -3998259470868952878
+      Layer 38_25: 3343124128258765990
+      Layer 38_26: 6054265747176052316
+      Layer 38_27: -2869527493830215589
+      Layer 38_28: 5988766448031924974
+      Layer 38_29: -9127663509371345307
+      Layer 38_3: 6552009399834757968
+      Layer 38_30: -5585242466897077081
+      Layer 38_31: -895191543358946659
+      Layer 38_32: 6782358517222256931
+      Layer 38_33: -2484935342461928017
+      Layer 38_34: 7073670352139504269
+      Layer 38_35: 942533452017169449
+      Layer 38_36: -7753100693065522818
+      Layer 38_4: -8703013245569116882
+      Layer 38_5: 1078959284466414525
+      Layer 38_6: -561177254197802416
+      Layer 38_7: 633811473501516715
+      Layer 38_8: 1503305210580306114
+      Layer 38_9: 7083627876682031889
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
