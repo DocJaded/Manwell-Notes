@@ -30,6 +30,7 @@ namespace ManWellNotes
         [Header("Editor")]
         [SerializeField] private GameObject editorPanel;
         [SerializeField] private TMP_InputField titleField;
+        [SerializeField] private TMP_Text createdText;
         [SerializeField] private TMP_InputField bodyField;
         [SerializeField] private Button pinButton;
         [SerializeField] private TMP_Text pinButtonText;
@@ -61,7 +62,8 @@ namespace ManWellNotes
 
             // A missing reference means the scene builder was not run or a required
             // object was deleted. We stop here instead of silently creating runtime UI.
-            if (font == null || notesContent == null || searchField == null || titleField == null || bodyField == null)
+            if (font == null || notesContent == null || searchField == null || titleField == null ||
+                createdText == null || bodyField == null)
             {
                 Debug.LogError("Man-Well Notes is not configured. Rebuild the notes interface from the Editor.");
                 enabled = false;
@@ -69,6 +71,8 @@ namespace ManWellNotes
             }
 
             notes.AddRange(store.Load().Where(note => note != null));
+            if (RepairMissingCreationDates())
+                store.Save(notes);
             BindEvents();
             RefreshList();
 
@@ -135,7 +139,9 @@ namespace ManWellNotes
 
             CanvasScaler scaler = gameObject.AddComponent<CanvasScaler>();
             scaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(1440f, 900f);
+            // Work in phone-sized logical units. A 1080 x 1920 display then renders
+            // these values at roughly 3 physical pixels per UI unit.
+            scaler.referenceResolution = new Vector2(360f, 640f);
             scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
             scaler.matchWidthOrHeight = 0.5f;
             gameObject.AddComponent<GraphicRaycaster>();
@@ -177,25 +183,25 @@ namespace ManWellNotes
             layout.childControlHeight = true;
             layout.childForceExpandWidth = true;
 
-            TMP_Text brand = Label("MAN-WELL", sidebar.transform, 24, FontStyles.Bold, White);
+            TMP_Text brand = Label("MAN-WELL", sidebar.transform, 28, FontStyles.Bold, White);
             brand.gameObject.AddComponent<LayoutElement>().preferredHeight = 35f;
 
-            TMP_Text subtitle = Label("NOTES", sidebar.transform, 11, FontStyles.Bold, new Color32(190, 190, 190, 255));
+            TMP_Text subtitle = Label("NOTES", sidebar.transform, 14, FontStyles.Bold, new Color32(190, 190, 190, 255));
             subtitle.gameObject.AddComponent<LayoutElement>().preferredHeight = 26f;
 
-            Button newButton = CreateButton("+   New note", sidebar.transform, White, Ink, 15, FontStyles.Bold);
+            Button newButton = CreateButton("+   New note", sidebar.transform, White, Ink, 19, FontStyles.Bold);
             newButton.gameObject.name = "New note";
             newButton.GetComponent<LayoutElement>().preferredHeight = 48f;
 
             Spacer(sidebar.transform, 15f);
-            TMP_Text library = Label("LIBRARY", sidebar.transform, 11, FontStyles.Bold, new Color32(155, 155, 155, 255));
+            TMP_Text library = Label("LIBRARY", sidebar.transform, 14, FontStyles.Bold, new Color32(155, 155, 155, 255));
             library.gameObject.AddComponent<LayoutElement>().preferredHeight = 22f;
 
-            Button allNotes = CreateButton("All notes", sidebar.transform, new Color32(38, 38, 38, 255), White, 15, FontStyles.Bold);
+            Button allNotes = CreateButton("All notes", sidebar.transform, new Color32(38, 38, 38, 255), White, 18, FontStyles.Bold);
             allNotes.gameObject.name = "All notes";
             allNotes.GetComponent<LayoutElement>().preferredHeight = 44f;
 
-            Button pinned = CreateButton("Pinned", sidebar.transform, Ink, White, 15, FontStyles.Normal);
+            Button pinned = CreateButton("Pinned", sidebar.transform, Ink, White, 18, FontStyles.Normal);
             pinned.gameObject.name = "Pinned";
             pinned.GetComponent<LayoutElement>().preferredHeight = 44f;
 
@@ -203,10 +209,10 @@ namespace ManWellNotes
             flexible.transform.SetParent(sidebar.transform, false);
             flexible.GetComponent<LayoutElement>().flexibleHeight = 1f;
 
-            statusText = Label("Ready", sidebar.transform, 12, FontStyles.Normal, new Color32(180, 180, 180, 255));
+            statusText = Label("Ready", sidebar.transform, 16, FontStyles.Normal, new Color32(180, 180, 180, 255));
             statusText.gameObject.AddComponent<LayoutElement>().preferredHeight = 22f;
 
-            TMP_Text storage = Label("Stored privately on this device", sidebar.transform, 10, FontStyles.Normal, new Color32(125, 125, 125, 255));
+            TMP_Text storage = Label("Stored privately on this device", sidebar.transform, 14, FontStyles.Normal, new Color32(125, 125, 125, 255));
             storage.gameObject.AddComponent<LayoutElement>().preferredHeight = 28f;
         }
 
@@ -224,10 +230,10 @@ namespace ManWellNotes
             layout.childControlHeight = true;
             layout.childForceExpandWidth = true;
 
-            notesHeading = Label("All notes", pane.transform, 27, FontStyles.Bold, Ink);
+            notesHeading = Label("All notes", pane.transform, 30, FontStyles.Bold, Ink);
             notesHeading.gameObject.AddComponent<LayoutElement>().preferredHeight = 38f;
 
-            searchField = CreateInput("Search notes", pane.transform, 14, false);
+            searchField = CreateInput("Search notes", pane.transform, 18, false);
             searchField.GetComponent<LayoutElement>().preferredHeight = 44f;
 
             GameObject rule = Panel("Rule", pane.transform, Line);
@@ -267,7 +273,7 @@ namespace ManWellNotes
             fitter.verticalFit = ContentSizeFitter.FitMode.PreferredSize;
             scroll.content = notesContent;
 
-            emptyMessage = Label("No notes yet.\nCreate one to get started.", viewport.transform, 15, FontStyles.Normal, Muted);
+            emptyMessage = Label("No notes yet.\nCreate one to get started.", viewport.transform, 18, FontStyles.Normal, Muted);
             Stretch(emptyMessage.rectTransform, 20f, 20f, 20f, 20f);
             emptyMessage.alignment = TextAlignmentOptions.Center;
         }
@@ -294,7 +300,7 @@ namespace ManWellNotes
             toolbarLayout.childControlHeight = true;
             toolbarLayout.childForceExpandHeight = true;
 
-            pinButton = CreateButton("Pin", toolbar.transform, Soft, Ink, 13, FontStyles.Bold);
+            pinButton = CreateButton("Pin", toolbar.transform, Soft, Ink, 17, FontStyles.Bold);
             pinButton.GetComponent<LayoutElement>().preferredWidth = 82f;
             pinButtonText = pinButton.GetComponentInChildren<TMP_Text>();
 
@@ -302,23 +308,27 @@ namespace ManWellNotes
             toolbarSpace.transform.SetParent(toolbar.transform, false);
             toolbarSpace.GetComponent<LayoutElement>().flexibleWidth = 1f;
 
-            Button deleteButton = CreateButton("Delete", toolbar.transform, Ink, White, 13, FontStyles.Bold);
+            Button deleteButton = CreateButton("Delete", toolbar.transform, Ink, White, 17, FontStyles.Bold);
             deleteButton.gameObject.name = "Delete";
             deleteButton.GetComponent<LayoutElement>().preferredWidth = 92f;
 
-            titleField = CreateInput("Title", editorPanel.transform, 31, false);
+            titleField = CreateInput("Title", editorPanel.transform, 34, false);
             titleField.textComponent.fontStyle = FontStyles.Bold;
             titleField.GetComponent<Image>().color = Paper;
             titleField.GetComponent<LayoutElement>().preferredHeight = 65f;
 
+            createdText = Label("Created date and time", editorPanel.transform, 16, FontStyles.Normal, Muted);
+            createdText.gameObject.name = "Created timestamp";
+            createdText.gameObject.AddComponent<LayoutElement>().preferredHeight = 24f;
+
             GameObject divider = Panel("Divider", editorPanel.transform, Line);
             divider.AddComponent<LayoutElement>().preferredHeight = 1f;
 
-            bodyField = CreateInput("Start writing…", editorPanel.transform, 17, true);
+            bodyField = CreateInput("Start writing…", editorPanel.transform, 20, true);
             bodyField.GetComponent<Image>().color = Paper;
             LayoutElement bodySize = bodyField.GetComponent<LayoutElement>();
             bodySize.flexibleHeight = 1f;
-            bodySize.minHeight = 400f;
+            bodySize.minHeight = 300f;
 
             // The editor uses a vertical layout, so placing the existing toolbar last
             // keeps Back, Pin and Delete at the bottom in newly generated scenes too.
@@ -383,6 +393,7 @@ namespace ManWellNotes
             pinButtonText.text = selectedNote.pinned ? "Pinned" : "Pin";
             RefreshList();
             QueueSave();
+            pageNavigator.ShowNotesPage();
         }
 
         private void SelectNote(NoteData note, bool navigateToEditor = true)
@@ -395,6 +406,7 @@ namespace ManWellNotes
             suppressEditorEvents = true;
             titleField.text = note.title ?? string.Empty;
             bodyField.text = note.body ?? string.Empty;
+            createdText.text = FormatCreated(note);
             pinButtonText.text = note.pinned ? "Pinned" : "Pin";
             suppressEditorEvents = false;
             editorPanel.SetActive(true);
@@ -409,6 +421,7 @@ namespace ManWellNotes
             suppressEditorEvents = true;
             titleField.text = string.Empty;
             bodyField.text = string.Empty;
+            createdText.text = string.Empty;
             suppressEditorEvents = false;
             editorPanel.SetActive(false);
         }
@@ -483,7 +496,7 @@ namespace ManWellNotes
             bool active = note == selectedNote;
             GameObject cardObject = Panel("Note", notesContent, active ? Ink : Soft);
             noteCards.Add(cardObject);
-            cardObject.AddComponent<LayoutElement>().preferredHeight = 112f;
+            cardObject.AddComponent<LayoutElement>().preferredHeight = 124f;
 
             Button button = cardObject.AddComponent<Button>();
             ColorBlock colors = button.colors;
@@ -494,28 +507,26 @@ namespace ManWellNotes
             button.targetGraphic = cardObject.GetComponent<Image>();
             button.onClick.AddListener(() => SelectNote(note));
 
-            VerticalLayoutGroup layout = cardObject.AddComponent<VerticalLayoutGroup>();
-            layout.padding = new RectOffset(16, 16, 13, 11);
-            layout.spacing = 5f;
-            layout.childControlWidth = true;
-            layout.childControlHeight = true;
-            layout.childForceExpandWidth = true;
+            // Runtime cards need explicit label bounds so TMP can render them on the
+            // first frame, without waiting for a nested layout-group rebuild.
+            GameObject contentObject = new GameObject("Card content", typeof(RectTransform));
+            contentObject.transform.SetParent(cardObject.transform, false);
+            Stretch(contentObject.GetComponent<RectTransform>(), 16f, 16f, 12f, 10f);
 
             string title = string.IsNullOrWhiteSpace(note.title) ? "Untitled note" : note.title.Trim();
             if (note.pinned)
                 title = "PINNED  ·  " + title;
-            TMP_Text titleText = Label(title, cardObject.transform, 15, FontStyles.Bold, active ? White : Ink);
-            titleText.gameObject.AddComponent<LayoutElement>().preferredHeight = 23f;
+            TMP_Text titleText = Label(title, contentObject.transform, 19, FontStyles.Bold, active ? White : Ink);
+            SetCardTextRect(titleText, 0f, 26f);
 
             string preview = string.IsNullOrWhiteSpace(note.body)
                 ? "No additional text"
                 : note.body.Replace("\r", " ").Replace("\n", " ").Trim();
-            TMP_Text previewText = Label(preview, cardObject.transform, 12, FontStyles.Normal, active ? new Color32(210, 210, 210, 255) : Muted);
-            previewText.gameObject.AddComponent<LayoutElement>().preferredHeight = 21f;
+            TMP_Text previewText = Label(preview, contentObject.transform, 17, FontStyles.Normal, active ? new Color32(210, 210, 210, 255) : Muted);
+            SetCardTextRect(previewText, 31f, 24f);
 
-            DateTime modified = new DateTime(Math.Max(note.modifiedUtcTicks, DateTime.MinValue.Ticks), DateTimeKind.Utc).ToLocalTime();
-            TMP_Text dateText = Label(FormatDate(modified), cardObject.transform, 10, FontStyles.Normal, active ? new Color32(160, 160, 160, 255) : Muted);
-            dateText.gameObject.AddComponent<LayoutElement>().preferredHeight = 18f;
+            TMP_Text dateText = Label(FormatCreated(note), contentObject.transform, 14, FontStyles.Normal, active ? new Color32(190, 190, 190, 255) : Muted);
+            SetCardTextRect(dateText, 62f, 22f);
         }
 
         private List<NoteData> SortedNotes()
@@ -526,13 +537,50 @@ namespace ManWellNotes
                 .ToList();
         }
 
-        private static string FormatDate(DateTime date)
+        private bool RepairMissingCreationDates()
         {
-            if (date.Date == DateTime.Today)
-                return $"Today, {date:h:mm tt}";
-            if (date.Date == DateTime.Today.AddDays(-1))
-                return $"Yesterday, {date:h:mm tt}";
-            return date.ToString("MMM d, yyyy");
+            bool repaired = false;
+            long now = DateTime.UtcNow.Ticks;
+
+            foreach (NoteData note in notes)
+            {
+                if (note.createdUtcTicks > DateTime.MinValue.Ticks &&
+                    note.createdUtcTicks <= DateTime.MaxValue.Ticks)
+                    continue;
+
+                note.createdUtcTicks =
+                    note.modifiedUtcTicks > DateTime.MinValue.Ticks &&
+                    note.modifiedUtcTicks <= DateTime.MaxValue.Ticks
+                        ? note.modifiedUtcTicks
+                        : now;
+                repaired = true;
+            }
+
+            return repaired;
+        }
+
+        private static string FormatCreated(NoteData note)
+        {
+            long ticks = note.createdUtcTicks > DateTime.MinValue.Ticks &&
+                         note.createdUtcTicks <= DateTime.MaxValue.Ticks
+                ? note.createdUtcTicks
+                : DateTime.UtcNow.Ticks;
+            DateTime created = new DateTime(ticks, DateTimeKind.Utc).ToLocalTime();
+            return $"Created {created:MMM d, yyyy} · {created:h:mm tt}";
+        }
+
+        private static void SetCardTextRect(TMP_Text text, float top, float height)
+        {
+            RectTransform rect = text.rectTransform;
+            rect.anchorMin = new Vector2(0f, 1f);
+            rect.anchorMax = Vector2.one;
+            rect.pivot = new Vector2(0.5f, 1f);
+            rect.anchoredPosition = new Vector2(0f, -top);
+            rect.sizeDelta = new Vector2(0f, height);
+
+            text.enableAutoSizing = false;
+            text.textWrappingMode = TextWrappingModes.NoWrap;
+            text.overflowMode = TextOverflowModes.Ellipsis;
         }
 
         private void QueueSave()

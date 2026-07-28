@@ -38,7 +38,7 @@ namespace ManWellNotesEditor
                 oldDesktopLayout.enabled = false;
 
             CanvasScaler scaler = root.GetComponent<CanvasScaler>();
-            scaler.referenceResolution = new Vector2(1080f, 1920f);
+            scaler.referenceResolution = new Vector2(360f, 640f);
             scaler.screenMatchMode = CanvasScaler.ScreenMatchMode.MatchWidthOrHeight;
             scaler.matchWidthOrHeight = 0.5f;
 
@@ -52,6 +52,8 @@ namespace ManWellNotesEditor
 
             if (font == null)
                 throw new System.InvalidOperationException("No assigned TMP font was found in the existing scene.");
+
+            TMP_Text createdText = GetOrCreateCreatedTimestamp(notesApp, editorPage.transform, font);
 
             Button notesBack = GetOrCreateBackButton(
                 notesPage.transform,
@@ -85,7 +87,10 @@ namespace ManWellNotesEditor
 
             SerializedObject appData = new SerializedObject(notesApp);
             appData.FindProperty("pageNavigator").objectReferenceValue = navigator;
+            appData.FindProperty("createdText").objectReferenceValue = createdText;
             appData.ApplyModifiedPropertiesWithoutUndo();
+
+            ApplyAccessibleTypography(root);
 
             // Save the scene showing its first page, exactly as it will open.
             libraryPage.SetActive(true);
@@ -103,6 +108,131 @@ namespace ManWellNotesEditor
             Selection.activeGameObject = root;
 
             Debug.Log("Applied the portrait, three-page layout without rebuilding existing page objects.");
+        }
+
+        private static void ApplyAccessibleTypography(GameObject root)
+        {
+            NotesApp app = root.GetComponent<NotesApp>();
+            SerializedObject appData = new SerializedObject(app);
+
+            SetInputFontSize(appData.FindProperty("searchField").objectReferenceValue as TMP_InputField, 18f);
+            SetInputFontSize(appData.FindProperty("titleField").objectReferenceValue as TMP_InputField, 34f);
+            SetInputFontSize(appData.FindProperty("bodyField").objectReferenceValue as TMP_InputField, 20f);
+            SetTextFontSize(appData.FindProperty("createdText").objectReferenceValue as TMP_Text, 16f);
+            SetTextFontSize(appData.FindProperty("notesHeading").objectReferenceValue as TMP_Text, 30f);
+            SetTextFontSize(appData.FindProperty("emptyMessage").objectReferenceValue as TMP_Text, 18f);
+            SetTextFontSize(appData.FindProperty("statusText").objectReferenceValue as TMP_Text, 16f);
+
+            foreach (TMP_Text text in root.GetComponentsInChildren<TMP_Text>(true))
+            {
+                string parentName = text.transform.parent != null ? text.transform.parent.name : string.Empty;
+
+                switch (parentName)
+                {
+                    case "New note":
+                        SetTextFontSize(text, 19f);
+                        break;
+                    case "All notes":
+                    case "Pinned":
+                        SetTextFontSize(text, 18f);
+                        break;
+                    case "Pin":
+                    case "Delete":
+                        SetTextFontSize(text, 17f);
+                        break;
+                    case "Back to library":
+                    case "Back to notes":
+                        SetTextFontSize(text, 22f);
+                        break;
+                }
+
+                switch (text.text)
+                {
+                    case "MAN-WELL":
+                        SetTextFontSize(text, 28f);
+                        break;
+                    case "NOTES":
+                    case "LIBRARY":
+                    case "Stored privately on this device":
+                        SetTextFontSize(text, 14f);
+                        break;
+                }
+            }
+        }
+
+        private static TMP_Text GetOrCreateCreatedTimestamp(
+            NotesApp app,
+            Transform editor,
+            TMP_FontAsset font)
+        {
+            Transform existing = editor.Find("Created timestamp");
+            TMP_Text text;
+
+            if (existing != null)
+            {
+                text = existing.GetComponent<TMP_Text>();
+            }
+            else
+            {
+                GameObject textObject = new GameObject(
+                    "Created timestamp",
+                    typeof(RectTransform),
+                    typeof(CanvasRenderer),
+                    typeof(TextMeshProUGUI),
+                    typeof(LayoutElement));
+                textObject.transform.SetParent(editor, false);
+                text = textObject.GetComponent<TMP_Text>();
+            }
+
+            text.text = "Created date and time";
+            text.font = font;
+            text.fontSize = 16f;
+            text.fontStyle = FontStyles.Normal;
+            text.color = new Color32(103, 103, 103, 255);
+            text.alignment = TextAlignmentOptions.MidlineLeft;
+            text.textWrappingMode = TextWrappingModes.NoWrap;
+            text.overflowMode = TextOverflowModes.Ellipsis;
+            text.enableAutoSizing = false;
+            text.raycastTarget = false;
+            text.GetComponent<LayoutElement>().preferredHeight = 24f;
+
+            SerializedObject appData = new SerializedObject(app);
+            TMP_InputField titleField =
+                appData.FindProperty("titleField").objectReferenceValue as TMP_InputField;
+            if (titleField != null)
+                text.transform.SetSiblingIndex(titleField.transform.GetSiblingIndex() + 1);
+
+            TMP_InputField bodyField =
+                appData.FindProperty("bodyField").objectReferenceValue as TMP_InputField;
+            if (bodyField != null)
+            {
+                LayoutElement bodySize = bodyField.GetComponent<LayoutElement>();
+                if (bodySize != null)
+                    bodySize.minHeight = 300f;
+            }
+
+            EditorUtility.SetDirty(text);
+            return text;
+        }
+
+        private static void SetInputFontSize(TMP_InputField input, float size)
+        {
+            if (input == null)
+                return;
+
+            SetTextFontSize(input.textComponent, size);
+            SetTextFontSize(input.placeholder as TMP_Text, size);
+            EditorUtility.SetDirty(input);
+        }
+
+        private static void SetTextFontSize(TMP_Text text, float size)
+        {
+            if (text == null)
+                return;
+
+            text.enableAutoSizing = false;
+            text.fontSize = size;
+            EditorUtility.SetDirty(text);
         }
 
         private static void PreparePage(GameObject page)
