@@ -33,6 +33,11 @@ namespace ManWellNotesEditor
             PlayerSettings.SetScriptingBackend(android, ScriptingImplementation.IL2CPP);
             PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
 
+            // Standard Activity keeps Android's native text-editing surface available.
+            // GameActivity always hides that native field, which removes the familiar
+            // selection handles and Cut/Copy/Paste/Select all menu.
+            PlayerSettings.Android.applicationEntry = AndroidApplicationEntry.Activity;
+
             // The Android interface uses one full-screen page at a time.
             PlayerSettings.defaultInterfaceOrientation = UIOrientation.Portrait;
             PlayerSettings.allowedAutorotateToPortrait = false;

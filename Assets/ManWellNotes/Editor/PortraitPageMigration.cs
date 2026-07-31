@@ -91,6 +91,8 @@ namespace ManWellNotesEditor
             appData.ApplyModifiedPropertiesWithoutUndo();
 
             ApplyAccessibleTypography(root);
+            notesApp.UpgradeInteractionInterface();
+            ConfigureNativeMobileEditing(notesApp);
 
             // Save the scene showing its first page, exactly as it will open.
             libraryPage.SetActive(true);
@@ -222,6 +224,28 @@ namespace ManWellNotesEditor
 
             SetTextFontSize(input.textComponent, size);
             SetTextFontSize(input.placeholder as TMP_Text, size);
+            EditorUtility.SetDirty(input);
+        }
+
+        private static void ConfigureNativeMobileEditing(NotesApp app)
+        {
+            SerializedObject appData = new SerializedObject(app);
+            SetNativeMobileEditing(
+                appData.FindProperty("titleField").objectReferenceValue as TMP_InputField);
+            SetNativeMobileEditing(
+                appData.FindProperty("bodyField").objectReferenceValue as TMP_InputField);
+        }
+
+        private static void SetNativeMobileEditing(TMP_InputField input)
+        {
+            if (input == null)
+                return;
+
+            SerializedObject inputData = new SerializedObject(input);
+            inputData.FindProperty("m_HideMobileInput").boolValue = false;
+            inputData.FindProperty("m_HideSoftKeyboard").boolValue = false;
+            inputData.FindProperty("m_OnFocusSelectAll").boolValue = false;
+            inputData.ApplyModifiedPropertiesWithoutUndo();
             EditorUtility.SetDirty(input);
         }
 

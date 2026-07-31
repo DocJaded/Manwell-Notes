@@ -18,6 +18,10 @@ namespace ManWellNotes
         private static readonly Color Soft = new Color32(239, 239, 239, 255);
         private static readonly Color Line = new Color32(218, 218, 218, 255);
         private static readonly Color Muted = new Color32(103, 103, 103, 255);
+        private static readonly Color ErrorRed = new Color32(185, 28, 28, 255);
+
+        private const int TitleHardCharacterLimit = 80;
+        private const int BodyCharacterLimit = 10000;
 
         // Scene references are serialized so you can inspect and rearrange the real
         // UI GameObjects in the Editor. The scene builder assigns all of these once.
@@ -32,8 +36,16 @@ namespace ManWellNotes
         [SerializeField] private TMP_InputField titleField;
         [SerializeField] private TMP_Text createdText;
         [SerializeField] private TMP_InputField bodyField;
+        [SerializeField] private Scrollbar bodyScrollbar;
         [SerializeField] private Button pinButton;
         [SerializeField] private TMP_Text pinButtonText;
+        [SerializeField] private TMP_Text inputLimitMessage;
+
+        [Header("Delete confirmation")]
+        [SerializeField] private GameObject deleteDialog;
+        [SerializeField] private TMP_Text deleteDialogMessage;
+        [SerializeField] private Button confirmDeleteButton;
+        [SerializeField] private Button cancelDeleteButton;
 
         [Header("Status")]
         [SerializeField] private TMP_Text statusText;
@@ -50,6 +62,9 @@ namespace ManWellNotes
         private readonly List<GameObject> noteCards = new List<GameObject>();
 
         private NoteData selectedNote;
+        private NoteData pendingDeleteNote;
+        private string lastAcceptedTitle = string.Empty;
+        private string lastAcceptedBody = string.Empty;
         private bool suppressEditorEvents;
         private bool saveQueued;
         private float saveAt;
@@ -59,11 +74,18 @@ namespace ManWellNotes
             // Unity API properties such as persistentDataPath are safe from Awake onward.
             // Constructing NoteStore here avoids accessing them in a field initializer.
             store = new NoteStore();
+            RemoveObsoleteEditingTools();
+            ConfigureTitleInput(titleField);
+            ConfigureMobileInput(bodyField);
+            EnsureInputLimitMessage();
+            EnsureBodyScrollbar();
 
             // A missing reference means the scene builder was not run or a required
             // object was deleted. We stop here instead of silently creating runtime UI.
             if (font == null || notesContent == null || searchField == null || titleField == null ||
-                createdText == null || bodyField == null)
+                createdText == null || bodyField == null || bodyScrollbar == null ||
+                inputLimitMessage == null || deleteDialog == null ||
+                confirmDeleteButton == null || cancelDeleteButton == null)
             {
                 Debug.LogError("Man-Well Notes is not configured. Rebuild the notes interface from the Editor.");
                 enabled = false;
@@ -85,6 +107,54 @@ namespace ManWellNotes
             pageNavigator.ShowLibraryPage();
         }
 
+        private void RemoveObsoleteEditingTools()
+        {
+            Transform tools = editorPanel != null ? editorPanel.transform.Find("Editing tools") : null;
+            if (tools == null)
+                return;
+
+            tools.gameObject.SetActive(false);
+            Destroy(tools.gameObject);
+        }
+
+        private void EnsureInputLimitMessage()
+        {
+            if (inputLimitMessage != null || editorPanel == null)
+                return;
+
+            Transform existing = editorPanel.transform.Find("Input limit message");
+            if (existing != null)
+                inputLimitMessage = existing.GetComponent<TMP_Text>();
+            else
+                BuildInputLimitMessage(editorPanel.transform);
+
+            if (inputLimitMessage != null && bodyField != null)
+                inputLimitMessage.transform.SetSiblingIndex(bodyField.transform.GetSiblingIndex());
+        }
+
+        private void EnsureBodyScrollbar()
+        {
+            if (bodyField == null)
+                return;
+
+            if (bodyScrollbar == null)
+            {
+                Transform existing = bodyField.transform.Find("Body scrollbar");
+                bodyScrollbar = existing != null
+                    ? existing.GetComponent<Scrollbar>()
+                    : BuildBodyScrollbar(bodyField);
+            }
+
+            bodyField.verticalScrollbar = bodyScrollbar;
+            bodyField.scrollSensitivity = 1f;
+
+            if (bodyField.GetComponent<RectMask2D>() == null)
+                bodyField.gameObject.AddComponent<RectMask2D>();
+
+            SetBodyTextPadding(bodyField.textComponent);
+            SetBodyTextPadding(bodyField.placeholder as TMP_Text);
+        }
+
         // UnityEvent listeners added with AddListener are runtime-only. Keeping all
         // bindings here makes it easy to see which user action calls which method.
         private void BindEvents()
@@ -93,6 +163,8 @@ namespace ManWellNotes
             titleField.onValueChanged.AddListener(OnTitleChanged);
             bodyField.onValueChanged.AddListener(OnBodyChanged);
             pinButton.onClick.AddListener(TogglePin);
+            confirmDeleteButton.onClick.AddListener(ConfirmDelete);
+            cancelDeleteButton.onClick.AddListener(HideDeleteConfirmation);
 
             FindButton("New note")?.onClick.AddListener(CreateNewNote);
             FindButton("All notes")?.onClick.AddListener(ShowAllNotes);
@@ -167,6 +239,7 @@ namespace ManWellNotes
             BuildSidebar(shell.transform);
             BuildNotesPane(shell.transform);
             BuildEditor(shell.transform);
+            BuildDeleteDialog();
         }
 
         private void BuildSidebar(Transform parent)
@@ -316,6 +389,7 @@ namespace ManWellNotes
             titleField.textComponent.fontStyle = FontStyles.Bold;
             titleField.GetComponent<Image>().color = Paper;
             titleField.GetComponent<LayoutElement>().preferredHeight = 65f;
+            ConfigureTitleInput(titleField);
 
             createdText = Label("Created date and time", editorPanel.transform, 16, FontStyles.Normal, Muted);
             createdText.gameObject.name = "Created timestamp";
@@ -324,15 +398,177 @@ namespace ManWellNotes
             GameObject divider = Panel("Divider", editorPanel.transform, Line);
             divider.AddComponent<LayoutElement>().preferredHeight = 1f;
 
+            BuildInputLimitMessage(editorPanel.transform);
+
             bodyField = CreateInput("Start writing…", editorPanel.transform, 20, true);
             bodyField.GetComponent<Image>().color = Paper;
             LayoutElement bodySize = bodyField.GetComponent<LayoutElement>();
             bodySize.flexibleHeight = 1f;
             bodySize.minHeight = 300f;
+            bodyScrollbar = BuildBodyScrollbar(bodyField);
 
             // The editor uses a vertical layout, so placing the existing toolbar last
             // keeps Back, Pin and Delete at the bottom in newly generated scenes too.
             toolbar.transform.SetAsLastSibling();
+        }
+
+        private void BuildInputLimitMessage(Transform parent)
+        {
+            inputLimitMessage = Label(
+                "Character limit reached.",
+                parent,
+                17,
+                FontStyles.Bold,
+                ErrorRed);
+            inputLimitMessage.gameObject.name = "Input limit message";
+            inputLimitMessage.gameObject.AddComponent<LayoutElement>().preferredHeight = 24f;
+            inputLimitMessage.textWrappingMode = TextWrappingModes.NoWrap;
+            inputLimitMessage.overflowMode = TextOverflowModes.Ellipsis;
+            inputLimitMessage.gameObject.SetActive(false);
+        }
+
+        private Scrollbar BuildBodyScrollbar(TMP_InputField input)
+        {
+            GameObject track = Panel("Body scrollbar", input.transform, new Color32(225, 225, 225, 255));
+            RectTransform trackRect = track.GetComponent<RectTransform>();
+            trackRect.anchorMin = new Vector2(1f, 0f);
+            trackRect.anchorMax = Vector2.one;
+            trackRect.pivot = new Vector2(1f, 0.5f);
+            trackRect.offsetMin = new Vector2(-22f, 8f);
+            trackRect.offsetMax = new Vector2(-4f, -8f);
+
+            GameObject slidingArea = new GameObject("Sliding area", typeof(RectTransform));
+            slidingArea.transform.SetParent(track.transform, false);
+            Stretch(slidingArea.GetComponent<RectTransform>(), 3f, 3f, 3f, 3f);
+
+            GameObject handle = Panel("Handle", slidingArea.transform, new Color32(90, 90, 90, 255));
+            RectTransform handleRect = handle.GetComponent<RectTransform>();
+            Stretch(handleRect);
+            handleRect.sizeDelta = new Vector2(0f, 28f);
+
+            Scrollbar scrollbar = track.AddComponent<Scrollbar>();
+            scrollbar.handleRect = handleRect;
+            scrollbar.targetGraphic = handle.GetComponent<Image>();
+            scrollbar.direction = Scrollbar.Direction.TopToBottom;
+            scrollbar.numberOfSteps = 0;
+
+            input.verticalScrollbar = scrollbar;
+            input.scrollSensitivity = 1f;
+            if (input.GetComponent<RectMask2D>() == null)
+                input.gameObject.AddComponent<RectMask2D>();
+
+            SetBodyTextPadding(input.textComponent);
+            SetBodyTextPadding(input.placeholder as TMP_Text);
+            return scrollbar;
+        }
+
+        private static void SetBodyTextPadding(TMP_Text text)
+        {
+            if (text == null)
+                return;
+
+            RectTransform rect = text.rectTransform;
+            rect.offsetMax = new Vector2(-32f, rect.offsetMax.y);
+        }
+
+        private void BuildDeleteDialog()
+        {
+            deleteDialog = Panel("Delete confirmation", transform, new Color32(0, 0, 0, 190));
+            Stretch(deleteDialog.GetComponent<RectTransform>());
+
+            GameObject dialog = Panel("Dialog", deleteDialog.transform, White);
+            RectTransform dialogRect = dialog.GetComponent<RectTransform>();
+            dialogRect.anchorMin = new Vector2(0.5f, 0.5f);
+            dialogRect.anchorMax = new Vector2(0.5f, 0.5f);
+            dialogRect.pivot = new Vector2(0.5f, 0.5f);
+            dialogRect.anchoredPosition = Vector2.zero;
+            dialogRect.sizeDelta = new Vector2(320f, 250f);
+
+            VerticalLayoutGroup layout = dialog.AddComponent<VerticalLayoutGroup>();
+            layout.padding = new RectOffset(24, 24, 22, 22);
+            layout.spacing = 14f;
+            layout.childControlWidth = true;
+            layout.childControlHeight = true;
+            layout.childForceExpandWidth = true;
+            layout.childForceExpandHeight = false;
+
+            TMP_Text heading = Label("Delete note?", dialog.transform, 27, FontStyles.Bold, Ink);
+            heading.gameObject.AddComponent<LayoutElement>().preferredHeight = 42f;
+
+            deleteDialogMessage = Label("Delete this note?\n\nThis cannot be undone.", dialog.transform, 18, FontStyles.Normal, Ink);
+            deleteDialogMessage.textWrappingMode = TextWrappingModes.Normal;
+            deleteDialogMessage.overflowMode = TextOverflowModes.Ellipsis;
+            deleteDialogMessage.gameObject.AddComponent<LayoutElement>().flexibleHeight = 1f;
+
+            GameObject buttons = Panel("Dialog buttons", dialog.transform, White);
+            buttons.AddComponent<LayoutElement>().preferredHeight = 52f;
+            HorizontalLayoutGroup buttonLayout = buttons.AddComponent<HorizontalLayoutGroup>();
+            buttonLayout.spacing = 10f;
+            buttonLayout.childControlWidth = true;
+            buttonLayout.childControlHeight = true;
+            buttonLayout.childForceExpandWidth = true;
+            buttonLayout.childForceExpandHeight = true;
+
+            cancelDeleteButton = CreateButton("Cancel", buttons.transform, Soft, Ink, 18, FontStyles.Bold);
+            confirmDeleteButton = CreateButton("Delete note", buttons.transform, Ink, White, 18, FontStyles.Bold);
+            deleteDialog.SetActive(false);
+        }
+
+        // Used by the in-place scene migration so existing page objects and user
+        // adjustments are retained while these newer controls are added.
+        public void UpgradeInteractionInterface()
+        {
+            ConfigureTitleInput(titleField);
+            ConfigureMobileInput(bodyField);
+            EnsureBodyScrollbar();
+
+            Transform tools = editorPanel != null ? editorPanel.transform.Find("Editing tools") : null;
+            if (tools != null)
+                DestroyImmediate(tools.gameObject);
+
+            EnsureInputLimitMessage();
+
+            if (bodyField != null)
+            {
+                LayoutElement bodySize = bodyField.GetComponent<LayoutElement>();
+                if (bodySize != null)
+                    bodySize.minHeight = 300f;
+            }
+
+            if (deleteDialog == null)
+                BuildDeleteDialog();
+        }
+
+        private static void ConfigureTitleInput(TMP_InputField input)
+        {
+            if (input == null || input.textComponent == null)
+                return;
+
+            input.onFocusSelectAll = false;
+            input.shouldHideMobileInput = false;
+            input.shouldHideSoftKeyboard = false;
+            input.textComponent.enableAutoSizing = true;
+            input.textComponent.fontSizeMax = 34f;
+            input.textComponent.fontSizeMin = 18f;
+            input.textComponent.textWrappingMode = TextWrappingModes.NoWrap;
+            input.textComponent.overflowMode = TextOverflowModes.Ellipsis;
+
+            if (input.placeholder is TMP_Text placeholder)
+            {
+                placeholder.enableAutoSizing = true;
+                placeholder.fontSizeMax = 34f;
+                placeholder.fontSizeMin = 18f;
+            }
+        }
+
+        private static void ConfigureMobileInput(TMP_InputField input)
+        {
+            if (input == null)
+                return;
+
+            input.onFocusSelectAll = false;
+            input.shouldHideMobileInput = false;
+            input.shouldHideSoftKeyboard = false;
         }
 
         private void ShowAllNotes()
@@ -366,20 +602,51 @@ namespace ManWellNotes
             if (selectedNote == null)
                 return;
 
-            int oldIndex = SortedNotes().IndexOf(selectedNote);
-            notes.Remove(selectedNote);
-            selectedNote = null;
+            ShowDeleteConfirmation(selectedNote);
+        }
+
+        private void ShowDeleteConfirmation(NoteData note)
+        {
+            if (note == null)
+                return;
+
+            pendingDeleteNote = note;
+            string title = string.IsNullOrWhiteSpace(note.title) ? "Untitled note" : note.title.Trim();
+            deleteDialogMessage.text = $"Delete “{title}”?\n\nThis cannot be undone.";
+            deleteDialog.SetActive(true);
+            deleteDialog.transform.SetAsLastSibling();
+        }
+
+        private void HideDeleteConfirmation()
+        {
+            pendingDeleteNote = null;
+            deleteDialog.SetActive(false);
+        }
+
+        private void ConfirmDelete()
+        {
+            NoteData note = pendingDeleteNote;
+            HideDeleteConfirmation();
+            if (note == null || !notes.Contains(note))
+                return;
+
+            int oldIndex = SortedNotes().IndexOf(note);
+            bool deletedSelectedNote = note == selectedNote;
+            notes.Remove(note);
+            if (deletedSelectedNote)
+                selectedNote = null;
             RefreshList();
 
-            List<NoteData> remaining = SortedNotes();
-            if (remaining.Count > 0)
-                SelectNote(remaining[Mathf.Clamp(oldIndex, 0, remaining.Count - 1)]);
-            else
+            if (deletedSelectedNote)
             {
-                ShowEmptyEditor();
-                pageNavigator.ShowNotesPage();
+                List<NoteData> remaining = SortedNotes();
+                if (remaining.Count > 0)
+                    SelectNote(remaining[Mathf.Clamp(oldIndex, 0, remaining.Count - 1)], false);
+                else
+                    ShowEmptyEditor();
             }
 
+            pageNavigator.ShowNotesPage();
             SaveImmediately();
         }
 
@@ -406,8 +673,11 @@ namespace ManWellNotes
             suppressEditorEvents = true;
             titleField.text = note.title ?? string.Empty;
             bodyField.text = note.body ?? string.Empty;
+            lastAcceptedTitle = titleField.text;
+            lastAcceptedBody = bodyField.text;
             createdText.text = FormatCreated(note);
             pinButtonText.text = note.pinned ? "Pinned" : "Pin";
+            HideInputLimitMessage();
             suppressEditorEvents = false;
             editorPanel.SetActive(true);
             RefreshList();
@@ -421,7 +691,10 @@ namespace ManWellNotes
             suppressEditorEvents = true;
             titleField.text = string.Empty;
             bodyField.text = string.Empty;
+            lastAcceptedTitle = string.Empty;
+            lastAcceptedBody = string.Empty;
             createdText.text = string.Empty;
+            HideInputLimitMessage();
             suppressEditorEvents = false;
             editorPanel.SetActive(false);
         }
@@ -431,6 +704,23 @@ namespace ManWellNotes
             if (suppressEditorEvents || selectedNote == null)
                 return;
 
+            titleField.textComponent.ForceMeshUpdate(true, true);
+            bool shorterThanBefore = value.Length < lastAcceptedTitle.Length;
+            bool exceedsLimit =
+                value.Length > TitleHardCharacterLimit ||
+                (titleField.textComponent.isTextOverflowing && !shorterThanBefore);
+
+            if (exceedsLimit)
+            {
+                RejectInput(
+                    titleField,
+                    lastAcceptedTitle,
+                    "Title character limit reached.");
+                return;
+            }
+
+            lastAcceptedTitle = value;
+            HideInputLimitMessage();
             selectedNote.title = value;
             TouchSelected();
         }
@@ -440,8 +730,42 @@ namespace ManWellNotes
             if (suppressEditorEvents || selectedNote == null)
                 return;
 
+            bool shorterThanBefore = value.Length < lastAcceptedBody.Length;
+            if (value.Length > BodyCharacterLimit && !shorterThanBefore)
+            {
+                RejectInput(
+                    bodyField,
+                    lastAcceptedBody,
+                    $"Note character limit reached ({BodyCharacterLimit:N0}).");
+                return;
+            }
+
+            lastAcceptedBody = value;
+            HideInputLimitMessage();
             selectedNote.body = value;
             TouchSelected();
+        }
+
+        private void RejectInput(TMP_InputField input, string acceptedValue, string message)
+        {
+            suppressEditorEvents = true;
+            input.SetTextWithoutNotify(acceptedValue ?? string.Empty);
+            int caret = input.text.Length;
+            input.selectionStringAnchorPosition = caret;
+            input.selectionStringFocusPosition = caret;
+            input.ForceLabelUpdate();
+            suppressEditorEvents = false;
+
+            inputLimitMessage.text = message;
+            inputLimitMessage.color = ErrorRed;
+            inputLimitMessage.gameObject.SetActive(true);
+            LayoutRebuilder.ForceRebuildLayoutImmediate(editorPanel.GetComponent<RectTransform>());
+        }
+
+        private void HideInputLimitMessage()
+        {
+            if (inputLimitMessage != null)
+                inputLimitMessage.gameObject.SetActive(false);
         }
 
         private void TouchSelected()
@@ -489,6 +813,9 @@ namespace ManWellNotes
 
             foreach (NoteData note in visible)
                 BuildNoteCard(note);
+
+            Canvas.ForceUpdateCanvases();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(notesContent);
         }
 
         private void BuildNoteCard(NoteData note)
@@ -496,7 +823,7 @@ namespace ManWellNotes
             bool active = note == selectedNote;
             GameObject cardObject = Panel("Note", notesContent, active ? Ink : Soft);
             noteCards.Add(cardObject);
-            cardObject.AddComponent<LayoutElement>().preferredHeight = 124f;
+            cardObject.AddComponent<LayoutElement>().preferredHeight = 132f;
 
             Button button = cardObject.AddComponent<Button>();
             ColorBlock colors = button.colors;
@@ -505,28 +832,35 @@ namespace ManWellNotes
             colors.pressedColor = new Color32(195, 195, 195, 255);
             button.colors = colors;
             button.targetGraphic = cardObject.GetComponent<Image>();
-            button.onClick.AddListener(() => SelectNote(note));
-
-            // Runtime cards need explicit label bounds so TMP can render them on the
-            // first frame, without waiting for a nested layout-group rebuild.
-            GameObject contentObject = new GameObject("Card content", typeof(RectTransform));
-            contentObject.transform.SetParent(cardObject.transform, false);
-            Stretch(contentObject.GetComponent<RectTransform>(), 16f, 16f, 12f, 10f);
+            LongPressButton longPress = cardObject.AddComponent<LongPressButton>();
+            longPress.LongPressed += () => ShowDeleteConfirmation(note);
+            button.onClick.AddListener(() =>
+            {
+                if (!longPress.ConsumeSuppressedClick())
+                    SelectNote(note);
+            });
 
             string title = string.IsNullOrWhiteSpace(note.title) ? "Untitled note" : note.title.Trim();
             if (note.pinned)
                 title = "PINNED  ·  " + title;
-            TMP_Text titleText = Label(title, contentObject.transform, 19, FontStyles.Bold, active ? White : Ink);
-            SetCardTextRect(titleText, 0f, 26f);
+            TMP_Text titleText = Label(title, cardObject.transform, 20, FontStyles.Bold, active ? White : Ink);
+            SetCardTextRect(titleText, 16f, 16f, 12f, 30f);
+            titleText.enableAutoSizing = true;
+            titleText.fontSizeMax = 20f;
+            titleText.fontSizeMin = 16f;
 
             string preview = string.IsNullOrWhiteSpace(note.body)
                 ? "No additional text"
                 : note.body.Replace("\r", " ").Replace("\n", " ").Trim();
-            TMP_Text previewText = Label(preview, contentObject.transform, 17, FontStyles.Normal, active ? new Color32(210, 210, 210, 255) : Muted);
-            SetCardTextRect(previewText, 31f, 24f);
+            TMP_Text previewText = Label(preview, cardObject.transform, 17, FontStyles.Normal, active ? new Color32(210, 210, 210, 255) : Muted);
+            SetCardTextRect(previewText, 16f, 16f, 48f, 25f);
 
-            TMP_Text dateText = Label(FormatCreated(note), contentObject.transform, 14, FontStyles.Normal, active ? new Color32(190, 190, 190, 255) : Muted);
-            SetCardTextRect(dateText, 62f, 22f);
+            TMP_Text dateText = Label(FormatCreated(note), cardObject.transform, 15, FontStyles.Normal, active ? new Color32(190, 190, 190, 255) : Muted);
+            SetCardTextRect(dateText, 16f, 16f, 83f, 24f);
+
+            titleText.ForceMeshUpdate(true, true);
+            previewText.ForceMeshUpdate(true, true);
+            dateText.ForceMeshUpdate(true, true);
         }
 
         private List<NoteData> SortedNotes()
@@ -569,14 +903,14 @@ namespace ManWellNotes
             return $"Created {created:MMM d, yyyy} · {created:h:mm tt}";
         }
 
-        private static void SetCardTextRect(TMP_Text text, float top, float height)
+        private static void SetCardTextRect(TMP_Text text, float left, float right, float top, float height)
         {
             RectTransform rect = text.rectTransform;
             rect.anchorMin = new Vector2(0f, 1f);
             rect.anchorMax = Vector2.one;
             rect.pivot = new Vector2(0.5f, 1f);
-            rect.anchoredPosition = new Vector2(0f, -top);
-            rect.sizeDelta = new Vector2(0f, height);
+            rect.offsetMin = new Vector2(left, -top - height);
+            rect.offsetMax = new Vector2(-right, -top);
 
             text.enableAutoSizing = false;
             text.textWrappingMode = TextWrappingModes.NoWrap;
@@ -671,6 +1005,9 @@ namespace ManWellNotes
             input.caretColor = Ink;
             input.selectionColor = new Color32(170, 170, 170, 120);
             input.customCaretColor = true;
+            input.onFocusSelectAll = false;
+            input.shouldHideMobileInput = false;
+            input.shouldHideSoftKeyboard = false;
 
             TMP_Text text = Label(string.Empty, inputObject.transform, size, FontStyles.Normal, Ink);
             Stretch(text.rectTransform, multiline ? 4f : 14f, 10f, multiline ? 8f : 5f, 5f);
