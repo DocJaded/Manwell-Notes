@@ -41,14 +41,56 @@ namespace ManWellNotesEditor
             if (body == null || !NativeMobileEditingIsSerialized(body))
                 throw new InvalidOperationException("Native mobile text editing is not enabled.");
 
+            GameObject editor = data.FindProperty("editorPanel").objectReferenceValue as GameObject;
+            if (editor == null)
+                throw new InvalidOperationException("The editor page is not configured.");
+            editor.SetActive(true);
+            Canvas.ForceUpdateCanvases();
+
             Scrollbar bodyScrollbar =
                 data.FindProperty("bodyScrollbar").objectReferenceValue as Scrollbar;
             if (bodyScrollbar == null ||
-                body.verticalScrollbar != bodyScrollbar ||
                 bodyScrollbar.direction != Scrollbar.Direction.TopToBottom ||
                 body.GetComponent<RectMask2D>() == null ||
                 body.textComponent.rectTransform.offsetMax.x > -30f)
                 throw new InvalidOperationException("The long-note scrollbar is not configured.");
+
+            string originalBody = body.text;
+            body.SetTextWithoutNotify(string.Join("\n", Enumerable.Repeat("Long note line", 80)));
+            MethodInfo refreshBodyScroll = typeof(NotesApp).GetMethod(
+                "RefreshBodyScrollState",
+                BindingFlags.Instance | BindingFlags.NonPublic);
+            refreshBodyScroll?.Invoke(app, new object[] { true });
+            if (body.verticalScrollbar != bodyScrollbar || !bodyScrollbar.gameObject.activeSelf)
+                throw new InvalidOperationException("The scrollbar does not activate for a long note.");
+            body.SetTextWithoutNotify(originalBody);
+            refreshBodyScroll?.Invoke(app, new object[] { true });
+
+            VerticalLayoutGroup editorLayout = editor != null
+                ? editor.GetComponent<VerticalLayoutGroup>()
+                : null;
+            LayoutElement deleteSize = editor != null
+                ? editor.GetComponentsInChildren<LayoutElement>(true)
+                    .FirstOrDefault(item => item.gameObject.name == "Delete")
+                : null;
+            Transform toolbar = editor != null ? editor.transform.Find("Toolbar") : null;
+            HorizontalLayoutGroup toolbarLayout = toolbar != null
+                ? toolbar.GetComponent<HorizontalLayoutGroup>()
+                : null;
+            if (editorLayout == null || editorLayout.padding.left > 20 ||
+                deleteSize == null || deleteSize.preferredWidth > 84f ||
+                toolbarLayout == null || !toolbarLayout.childControlWidth ||
+                toolbarLayout.childForceExpandWidth)
+                throw new InvalidOperationException("The editor toolbar can place Delete off-screen.");
+
+            string[] toolbarButtonNames = { "Back to notes", "Pin", "Delete" };
+            if (toolbarButtonNames.Any(buttonName =>
+            {
+                Transform button = toolbar != null ? toolbar.Find(buttonName) : null;
+                Image image = button != null ? button.GetComponent<Image>() : null;
+                return image == null || !image.preserveAspect;
+            }))
+                throw new InvalidOperationException("An editor toolbar icon does not preserve its aspect ratio.");
 
             if (UnityEngine.Object.FindObjectsByType<Transform>(
                     FindObjectsInactive.Include,

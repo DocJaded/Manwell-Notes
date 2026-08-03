@@ -67,6 +67,9 @@ namespace ManWellNotes
         private string lastAcceptedBody = string.Empty;
         private bool suppressEditorEvents;
         private bool saveQueued;
+        private bool bodyScrollbarEnabled;
+        private string lastMeasuredBodyText;
+        private Vector2 lastMeasuredBodyViewport = new Vector2(-1f, -1f);
         private float saveAt;
 
         private void Awake()
@@ -76,9 +79,11 @@ namespace ManWellNotes
             store = new NoteStore();
             RemoveObsoleteEditingTools();
             ConfigureTitleInput(titleField);
+            ConfigureMobileInput(titleField);
             ConfigureMobileInput(bodyField);
             EnsureInputLimitMessage();
             EnsureBodyScrollbar();
+            ConfigureEditorLayout();
 
             // A missing reference means the scene builder was not run or a required
             // object was deleted. We stop here instead of silently creating runtime UI.
@@ -145,7 +150,6 @@ namespace ManWellNotes
                     : BuildBodyScrollbar(bodyField);
             }
 
-            bodyField.verticalScrollbar = bodyScrollbar;
             bodyField.scrollSensitivity = 1f;
 
             if (bodyField.GetComponent<RectMask2D>() == null)
@@ -153,6 +157,51 @@ namespace ManWellNotes
 
             SetBodyTextPadding(bodyField.textComponent);
             SetBodyTextPadding(bodyField.placeholder as TMP_Text);
+        }
+
+        private void ConfigureEditorLayout()
+        {
+            if (editorPanel == null)
+                return;
+
+            VerticalLayoutGroup editorLayout = editorPanel.GetComponent<VerticalLayoutGroup>();
+            if (editorLayout != null)
+                editorLayout.padding = new RectOffset(20, 20, 24, 28);
+
+            Transform toolbar = editorPanel.transform.Find("Toolbar");
+            if (toolbar == null)
+                return;
+
+            HorizontalLayoutGroup toolbarLayout = toolbar.GetComponent<HorizontalLayoutGroup>();
+            if (toolbarLayout != null)
+            {
+                toolbarLayout.spacing = 6f;
+                toolbarLayout.childControlWidth = true;
+                toolbarLayout.childForceExpandWidth = false;
+            }
+
+            SetPreferredWidth(toolbar, "Back to notes", 88f);
+            SetPreferredWidth(toolbar, "Pin", 72f);
+            SetPreferredWidth(toolbar, "Delete", 84f);
+            SetButtonPreserveAspect(toolbar, "Back to notes");
+            SetButtonPreserveAspect(toolbar, "Pin");
+            SetButtonPreserveAspect(toolbar, "Delete");
+        }
+
+        private static void SetPreferredWidth(Transform parent, string childName, float width)
+        {
+            Transform child = parent.Find(childName);
+            LayoutElement size = child != null ? child.GetComponent<LayoutElement>() : null;
+            if (size != null)
+                size.preferredWidth = width;
+        }
+
+        private static void SetButtonPreserveAspect(Transform parent, string childName)
+        {
+            Transform child = parent.Find(childName);
+            Image image = child != null ? child.GetComponent<Image>() : null;
+            if (image != null)
+                image.preserveAspect = true;
         }
 
         // UnityEvent listeners added with AddListener are runtime-only. Keeping all
@@ -186,6 +235,19 @@ namespace ManWellNotes
             saveQueued = false;
             store.Save(notes);
             SetStatus("Saved");
+        }
+
+        private void LateUpdate()
+        {
+            if (bodyField == null || bodyField.textViewport == null)
+                return;
+
+            string currentText = bodyField.text ?? string.Empty;
+            Vector2 viewportSize = bodyField.textViewport.rect.size;
+            if (currentText == lastMeasuredBodyText && viewportSize == lastMeasuredBodyViewport)
+                return;
+
+            RefreshBodyScrollState(false);
         }
 
         private void OnApplicationPause(bool paused)
@@ -359,7 +421,7 @@ namespace ManWellNotes
             size.minWidth = 480f;
 
             VerticalLayoutGroup layout = editorPanel.AddComponent<VerticalLayoutGroup>();
-            layout.padding = new RectOffset(42, 42, 24, 28);
+            layout.padding = new RectOffset(20, 20, 24, 28);
             layout.spacing = 12f;
             layout.childControlWidth = true;
             layout.childControlHeight = true;
@@ -368,13 +430,14 @@ namespace ManWellNotes
             GameObject toolbar = Panel("Toolbar", editorPanel.transform, Paper);
             toolbar.AddComponent<LayoutElement>().preferredHeight = 42f;
             HorizontalLayoutGroup toolbarLayout = toolbar.AddComponent<HorizontalLayoutGroup>();
-            toolbarLayout.spacing = 8f;
-            toolbarLayout.childControlWidth = false;
+            toolbarLayout.spacing = 6f;
+            toolbarLayout.childControlWidth = true;
             toolbarLayout.childControlHeight = true;
             toolbarLayout.childForceExpandHeight = true;
 
             pinButton = CreateButton("Pin", toolbar.transform, Soft, Ink, 17, FontStyles.Bold);
-            pinButton.GetComponent<LayoutElement>().preferredWidth = 82f;
+            pinButton.GetComponent<LayoutElement>().preferredWidth = 72f;
+            pinButton.GetComponent<Image>().preserveAspect = true;
             pinButtonText = pinButton.GetComponentInChildren<TMP_Text>();
 
             GameObject toolbarSpace = new GameObject("Space", typeof(RectTransform), typeof(LayoutElement));
@@ -383,7 +446,8 @@ namespace ManWellNotes
 
             Button deleteButton = CreateButton("Delete", toolbar.transform, Ink, White, 17, FontStyles.Bold);
             deleteButton.gameObject.name = "Delete";
-            deleteButton.GetComponent<LayoutElement>().preferredWidth = 92f;
+            deleteButton.GetComponent<LayoutElement>().preferredWidth = 84f;
+            deleteButton.GetComponent<Image>().preserveAspect = true;
 
             titleField = CreateInput("Title", editorPanel.transform, 34, false);
             titleField.textComponent.fontStyle = FontStyles.Bold;
@@ -452,13 +516,13 @@ namespace ManWellNotes
             scrollbar.direction = Scrollbar.Direction.TopToBottom;
             scrollbar.numberOfSteps = 0;
 
-            input.verticalScrollbar = scrollbar;
             input.scrollSensitivity = 1f;
             if (input.GetComponent<RectMask2D>() == null)
                 input.gameObject.AddComponent<RectMask2D>();
 
             SetBodyTextPadding(input.textComponent);
             SetBodyTextPadding(input.placeholder as TMP_Text);
+            track.SetActive(false);
             return scrollbar;
         }
 
@@ -468,7 +532,73 @@ namespace ManWellNotes
                 return;
 
             RectTransform rect = text.rectTransform;
-            rect.offsetMax = new Vector2(-32f, rect.offsetMax.y);
+            rect.anchorMin = Vector2.zero;
+            rect.anchorMax = Vector2.one;
+            rect.pivot = new Vector2(0.5f, 0.5f);
+            rect.offsetMin = new Vector2(4f, 8f);
+            rect.offsetMax = new Vector2(-32f, -8f);
+        }
+
+        private void RefreshBodyScrollState(bool resetToTop)
+        {
+            if (bodyField == null || bodyScrollbar == null || bodyField.textComponent == null)
+                return;
+
+            bodyField.textComponent.ForceMeshUpdate(true, true);
+            float viewportHeight = bodyField.textViewport != null
+                ? bodyField.textViewport.rect.height
+                : 0f;
+            bool needsScrolling = viewportHeight > 1f &&
+                                  bodyField.textComponent.preferredHeight > viewportHeight + 1f;
+
+            if (needsScrolling)
+            {
+                if (!bodyScrollbarEnabled)
+                {
+                    bodyScrollbar.gameObject.SetActive(true);
+                    bodyField.verticalScrollbar = bodyScrollbar;
+                    bodyScrollbarEnabled = true;
+                }
+
+                if (resetToTop)
+                {
+                    bodyField.textComponent.rectTransform.anchoredPosition = Vector2.zero;
+                    bodyScrollbar.SetValueWithoutNotify(0f);
+                }
+            }
+            else
+            {
+                if (bodyScrollbarEnabled || bodyField.verticalScrollbar != null)
+                    bodyField.verticalScrollbar = null;
+
+                bodyScrollbarEnabled = false;
+                bodyScrollbar.gameObject.SetActive(false);
+                bodyField.textComponent.rectTransform.anchoredPosition = Vector2.zero;
+            }
+
+            lastMeasuredBodyText = bodyField.text ?? string.Empty;
+            lastMeasuredBodyViewport = bodyField.textViewport != null
+                ? bodyField.textViewport.rect.size
+                : Vector2.zero;
+        }
+
+        private void ResetBodyScrollToTop()
+        {
+            if (bodyField == null)
+                return;
+
+            bodyField.verticalScrollbar = null;
+            bodyScrollbarEnabled = false;
+            if (bodyScrollbar != null)
+            {
+                bodyScrollbar.SetValueWithoutNotify(0f);
+                bodyScrollbar.gameObject.SetActive(false);
+            }
+
+            if (bodyField.textComponent != null)
+                bodyField.textComponent.rectTransform.anchoredPosition = Vector2.zero;
+
+            RefreshBodyScrollState(true);
         }
 
         private void BuildDeleteDialog()
@@ -519,8 +649,10 @@ namespace ManWellNotes
         public void UpgradeInteractionInterface()
         {
             ConfigureTitleInput(titleField);
+            ConfigureMobileInput(titleField);
             ConfigureMobileInput(bodyField);
             EnsureBodyScrollbar();
+            ConfigureEditorLayout();
 
             Transform tools = editorPanel != null ? editorPanel.transform.Find("Editing tools") : null;
             if (tools != null)
@@ -545,8 +677,6 @@ namespace ManWellNotes
                 return;
 
             input.onFocusSelectAll = false;
-            input.shouldHideMobileInput = false;
-            input.shouldHideSoftKeyboard = false;
             input.textComponent.enableAutoSizing = true;
             input.textComponent.fontSizeMax = 34f;
             input.textComponent.fontSizeMin = 18f;
@@ -567,8 +697,12 @@ namespace ManWellNotes
                 return;
 
             input.onFocusSelectAll = false;
-            input.shouldHideMobileInput = false;
-            input.shouldHideSoftKeyboard = false;
+            if (Application.platform == RuntimePlatform.Android ||
+                Application.platform == RuntimePlatform.IPhonePlayer)
+            {
+                input.shouldHideMobileInput = false;
+                input.shouldHideSoftKeyboard = false;
+            }
         }
 
         private void ShowAllNotes()
@@ -679,6 +813,7 @@ namespace ManWellNotes
             pinButtonText.text = note.pinned ? "Pinned" : "Pin";
             HideInputLimitMessage();
             suppressEditorEvents = false;
+            ResetBodyScrollToTop();
             editorPanel.SetActive(true);
             RefreshList();
 
@@ -696,6 +831,7 @@ namespace ManWellNotes
             createdText.text = string.Empty;
             HideInputLimitMessage();
             suppressEditorEvents = false;
+            ResetBodyScrollToTop();
             editorPanel.SetActive(false);
         }
 

@@ -1,16 +1,10 @@
 fileFormatVersion: 2
-guid: 41ab51553d308664382af33844eef186
+guid: e51d16faebc3c4846a3aba87da162085
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -5451408081579605558
-    second: Layer 17_0
-  - first:
-      213: -3424640815660514943
-    second: Layer 17_1
-  - first:
-      213: 9194049621541577327
-    second: Layer 17_2
+      213: -5775865255851654009
+    second: Layer 4 copy 2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -132,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Layer 17_0
+      name: Layer 4 copy 2_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 932
-        height: 892
+        width: 512
+        height: 512
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -147,52 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ac101cb8b35b854b0800000000000000
-      internalID: -5451408081579605558
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Layer 17_1
-      rect:
-        serializedVersion: 2
-        x: 851
-        y: 835
-        width: 102
-        height: 106
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 181404b925b3970d0800000000000000
-      internalID: -3424640815660514943
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Layer 17_2
-      rect:
-        serializedVersion: 2
-        x: 911
-        y: 780
-        width: 8
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f62ec4b2b63d79f70800000000000000
-      internalID: 9194049621541577327
+      spriteID: 7840172d62108dfa0800000000000000
+      internalID: -5775865255851654009
       vertices: []
       indices: 
       edges: []
@@ -211,9 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Layer 17_0: -5451408081579605558
-      Layer 17_1: -3424640815660514943
-      Layer 17_2: 9194049621541577327
+      Layer 4 copy 2_0: -5775865255851654009
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

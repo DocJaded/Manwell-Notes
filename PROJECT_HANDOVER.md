@@ -177,6 +177,12 @@ Keep the scrollbar separate from the main text surface: this preserves Android's
 touch caret and native selection gestures while providing an unambiguous scroll
 target on the right edge.
 
+The scrollbar is hidden while the body fits in the viewport and is attached to the
+TMP input only after the note becomes taller than the viewport. This avoids TMP's
+short-text scroll calculation pushing new text toward the bottom. Opening another
+note resets its body to the top. The editor uses compact toolbar width constraints
+so Back, Pin, and Delete remain on-screen at the 360-unit portrait reference.
+
 The current design assumes:
 
 - portrait orientation;
