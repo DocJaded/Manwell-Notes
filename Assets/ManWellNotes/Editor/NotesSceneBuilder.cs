@@ -1,4 +1,5 @@
 using ManWellNotes;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
@@ -14,6 +15,10 @@ namespace ManWellNotesEditor
     {
         private const string ScenePath = "Assets/Scenes/SampleScene.unity";
         private const string RootName = "Man-Well Notes";
+        private const string PinnedIconBlackPath =
+            "Assets/ManWellNotes/Icons/General Icons/Set 1/1024 px/Black/Untitled-1_0000s_0003_Layer-32.png";
+        private const string PinnedIconWhitePath =
+            "Assets/ManWellNotes/Icons/General Icons/Set 1/1024 px/Set-1-_-1024px_0000s_0003_Layer-32.png";
 
         [MenuItem("Tools/Man-Well Notes/Rebuild Notes Interface")]
         public static void Build()
@@ -30,6 +35,7 @@ namespace ManWellNotesEditor
             GameObject root = new GameObject(RootName, typeof(RectTransform));
             NotesApp app = root.AddComponent<NotesApp>();
             app.BuildSceneInterface(primaryFont);
+            AssignPinnedIcons(app);
 
             EditorUtility.SetDirty(app);
             EditorSceneManager.MarkSceneDirty(scene);
@@ -37,6 +43,23 @@ namespace ManWellNotesEditor
 
             Selection.activeGameObject = root;
             Debug.Log("Built the editable Man-Well Notes interface in SampleScene.");
+        }
+
+        public static void AssignPinnedIcons(NotesApp app)
+        {
+            Sprite black = AssetDatabase.LoadAllAssetsAtPath(PinnedIconBlackPath)
+                .OfType<Sprite>()
+                .FirstOrDefault();
+            Sprite white = AssetDatabase.LoadAllAssetsAtPath(PinnedIconWhitePath)
+                .OfType<Sprite>()
+                .FirstOrDefault();
+            if (black == null || white == null)
+                throw new System.InvalidOperationException("The starred-note icon sprites could not be loaded.");
+
+            SerializedObject data = new SerializedObject(app);
+            data.FindProperty("pinnedIconBlack").objectReferenceValue = black;
+            data.FindProperty("pinnedIconWhite").objectReferenceValue = white;
+            data.ApplyModifiedPropertiesWithoutUndo();
         }
     }
 }

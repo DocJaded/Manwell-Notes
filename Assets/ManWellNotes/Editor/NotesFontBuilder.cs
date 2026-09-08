@@ -24,12 +24,20 @@ namespace ManWellNotesEditor
             ("Noto Sans Arabic", "Assets/Resources/Noto_Sans,Noto_Sans_Arabic,Noto_Sans_Hebrew,Noto_Sans_KR,Noto_Sans_Myanmar,etc/Noto_Sans_Arabic/static/NotoSansArabic-Regular.ttf"),
             ("Noto Sans Hebrew", "Assets/Resources/Noto_Sans,Noto_Sans_Arabic,Noto_Sans_Hebrew,Noto_Sans_KR,Noto_Sans_Myanmar,etc/Noto_Sans_Hebrew/static/NotoSansHebrew-Regular.ttf"),
             ("Noto Sans Myanmar", "Assets/Resources/Noto_Sans,Noto_Sans_Arabic,Noto_Sans_Hebrew,Noto_Sans_KR,Noto_Sans_Myanmar,etc/Noto_Sans_Myanmar/static/NotoSansMyanmar-Regular.ttf"),
+            ("Noto Sans Runic", "Assets/Resources/Noto_Sans,Noto_Sans_Arabic,Noto_Sans_Hebrew,Noto_Sans_KR,Noto_Sans_Myanmar,etc/Noto_Sans_Runic/NotoSansRunic-Regular.ttf"),
 
             // These retain region-appropriate forms for Korean and Chinese text.
             ("Noto Sans Korean", "Assets/Resources/Noto_Sans,Noto_Sans_Arabic,Noto_Sans_Hebrew,Noto_Sans_KR,Noto_Sans_Myanmar,etc/Noto_Sans_KR/static/NotoSansKR-Regular.ttf"),
             ("Noto Sans Simplified Chinese", "Assets/Resources/Noto_Sans,Noto_Sans_Arabic,Noto_Sans_Hebrew,Noto_Sans_KR,Noto_Sans_Myanmar,etc/Noto_Sans_SC/static/NotoSansSC-Regular.ttf"),
             ("Noto Sans Traditional Chinese", "Assets/Resources/Noto_Sans,Noto_Sans_Arabic,Noto_Sans_Hebrew,Noto_Sans_KR,Noto_Sans_Myanmar,etc/Noto_Sans_TC/static/NotoSansTC-Regular.ttf")
         };
+
+        [MenuItem("Tools/Man-Well Notes/Rebuild Font Fallbacks")]
+        private static void RebuildFontFallbacks()
+        {
+            BuildPrimaryFont();
+            Debug.Log("Rebuilt the Sekaiwo TextMesh Pro font and all configured Noto fallbacks.");
+        }
 
         public static TMP_FontAsset BuildPrimaryFont()
         {
@@ -60,7 +68,8 @@ namespace ManWellNotesEditor
             // Exercise representative scripts now. Dynamic assets will add other
             // characters from the same source fonts as users type them later.
             const string coverageSample =
-                "Sekaiwo · 日本語 · हिन्दी · العربية · עברית · မြန်မာ · 한국어 · 中文";
+                "Sekaiwo · Ελληνικά · Русский · हिन्दी · 日本語 · " +
+                "العربية · עברית · မြန်မာ · ᚠᚢᚦᚨᚱ · 한국어 · 简体中文 · 繁體中文";
             if (!primary.HasCharacters(
                     coverageSample,
                     out uint[] missingCharacters,

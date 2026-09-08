@@ -1,6 +1,6 @@
 # Man-Well Notes — Project Handover
 
-Last updated: 30 July 2026  
+Last updated: 19 August 2026  
 Unity version: 6000.3.7f1  
 Repository: `https://github.com/DocJaded/Manwell-Notes.git`  
 Primary branch: `main`
@@ -11,9 +11,9 @@ Man-Well Notes is a small, offline Android notes application built with Unity UI
 and TextMesh Pro. The current interface is portrait-only and uses three full-screen
 pages:
 
-1. Library — entry points for all notes, pinned notes, and creating a note.
+1. Library — entry points for all notes, starred notes, and creating a note.
 2. Notes list — search, note cards, and navigation back to the library.
-3. Editor — title, creation timestamp, body, Pin/Unpin, Delete, and Back.
+3. Editor — title, creation timestamp, body, Save, Delete, and Back.
 
 Notes are stored locally as JSON. There is currently no account, cloud sync,
 encryption, export, import, backup, or conflict handling.
@@ -26,16 +26,15 @@ The only enabled build scene is:
 
 - The app opens on the Library page.
 - All notes opens the complete list.
-- Pinned opens the list with the internal `is:pinned` filter.
+- Starred opens the list with the internal `is:starred` filter.
 - New note creates and immediately opens a blank note.
 - Selecting a card opens that note in the editor.
-- Pin and Unpin refresh the list and automatically return to the notes page.
+- Long-pressing a note card stars or unstars it and saves immediately.
 - Delete opens a confirmation dialog and returns to the notes list after confirmation.
-- Long-pressing a note card for about 0.65 seconds opens the same delete confirmation.
-- Notes are sorted with pinned notes first, then by most recently modified.
+- Notes are sorted with starred notes first, then by most recently modified.
 - Search matches title and body using case-insensitive substring matching.
 - Each card shows:
-  - `PINNED ·` when appropriate;
+  - a star icon when appropriate;
   - title, with `Untitled note` as the fallback;
   - a one-line body preview;
   - local creation date and time.
@@ -62,7 +61,7 @@ The only enabled build scene is:
 - Owns the application state and most UI behavior.
 - Binds button/input events.
 - Creates runtime note cards.
-- Handles filtering, sorting, pinning, deleting, and autosave.
+- Handles filtering, sorting, starring, deleting, and autosave.
 - Contains the UI construction code used by the scene builder.
 - Uses fixed accessible text sizes and a `360 × 640` Canvas reference.
 - Builds the delete confirmation and configures native mobile text editing for
@@ -73,6 +72,19 @@ The only enabled build scene is:
 - Detects a deliberate 0.65-second hold on a note card.
 - Suppresses the normal open-note click after a successful long press.
 
+`Assets/ManWellNotes/Scripts/NoteCardView.cs`
+
+- Holds the inspector-visible references for a note card's background, button,
+  long-press control, star icon, title, preview, and creation timestamp.
+- Applies note data and active/starred visual state to an instantiated card.
+- Does not construct any visual children at runtime.
+
+`Assets/ManWellNotes/Prefabs/Note Card.prefab`
+
+- Is the editable source of truth for note-card hierarchy, geometry, typography,
+  icon placement, background, button, and long-press component.
+- Is assigned to `NotesApp` in `SampleScene` and instantiated for each visible note.
+
 `Assets/ManWellNotes/Scripts/NoteData.cs`
 
 - Defines the serialized note model:
@@ -82,6 +94,8 @@ The only enabled build scene is:
   - `createdUtcTicks`
   - `modifiedUtcTicks`
   - `pinned`
+- The persisted field remains named `pinned` for compatibility with existing note
+  files; the interface consistently calls this state “starred.”
 - Contains `NoteStore`, which reads and writes the JSON file.
 
 `Assets/ManWellNotes/Scripts/NotesPageNavigator.cs`
@@ -142,7 +156,7 @@ and signing identity are unchanged.
 Saving behavior:
 
 - Text changes use a 0.45-second debounce.
-- Pin/Unpin queues a save.
+- Star/unstar saves immediately.
 - Delete saves immediately.
 - Application pause and quit save immediately.
 - Legacy notes without a creation timestamp are repaired using their modification
@@ -158,9 +172,27 @@ Important limitations:
 
 ## 5. Scene and UI rules
 
-The scene contains the persistent page hierarchy, but note cards are runtime objects.
-Editing a card in the Unity hierarchy will not change the cards seen in the app.
-Change `BuildNoteCard` in `NotesApp.cs` instead.
+The scene contains the persistent page hierarchy. Note cards are instantiated from the
+saved `Assets/ManWellNotes/Prefabs/Note Card.prefab`; open that prefab in the Unity
+Editor to adjust their hierarchy, sizing, typography, icon placement, and styling.
+Runtime card instances are still temporary views of the saved JSON data, but their
+visual definition is no longer constructed in code.
+
+### Required editor-first architecture
+
+**No runtime sorcery: the app should be made in a way that all objects are available
+in the editor for manual tweaking.**
+
+Treat this as a requirement for future UI work. Persistent controls, templates, and
+visual structure should exist as saved scene objects or prefabs with inspector-visible
+references and settings. Runtime code may populate data, duplicate a saved prefab, and
+bind behavior, but it should not be the sole definition of an interface that a designer
+may need to adjust.
+
+The note-card implementation now meets this requirement. `BuildNoteCard` instantiates
+the saved `Note Card` prefab, populates it, and binds its interactions. It does not create
+the card background, labels, icon, button, layout element, or long-press component.
+Edit the prefab itself rather than a temporary instance created during Play mode.
 
 Runtime cards use explicit anchored rectangles for title, preview, and timestamp.
 This is intentional. A nested layout group previously produced blank-looking cards
@@ -351,8 +383,8 @@ next build substantially slower.
   small note count but will become inefficient with hundreds or thousands of notes.
 - `RefreshList` destroys and recreates every visible card. Consider pooling or
   incremental updates if the data set grows.
-- Pinning and unpinning both return to the notes list. This is deliberate but should
-  be reconsidered if users expect to continue editing.
+- Long-press starring waits for pointer-up before refreshing the list, preventing
+  the release gesture from opening or altering a note.
 - All notes live in memory and the entire collection is rewritten on save.
 - Current app-category settings still identify the Android build as a game in parts
   of Unity's generated settings; review store metadata before release.
@@ -363,20 +395,21 @@ next build substantially slower.
 Before an APK handoff:
 
 1. Launch and confirm the Library page is first.
-2. Open All notes and Pinned, then test Android Back.
+2. Open All notes and Starred, then test Android Back and the separate Notes-page
+   Back button.
 3. Create a note and enter a title and multiline body.
 4. Confirm its title, preview, and creation timestamp appear on the card.
 5. Reopen it and confirm the same timestamp appears below the title.
-6. Pin it and confirm the app returns to the list with visible card text.
-7. Open Pinned and confirm the note appears.
-8. Unpin it and confirm it disappears from the pinned-only list.
+6. Long-press it to star it and confirm all note text remains unchanged.
+7. Open Starred and confirm the note appears and the filter reads `is:starred`.
+8. Long-press again and confirm it disappears from the starred-only list.
 9. Search by title and body text.
 10. Open the keyboard and confirm the editor/toolbar remain accessible.
 11. Background and resume the app, then restart it and confirm persistence.
-12. Long-press a card, cancel deletion, and confirm the note still opens normally
-    with a short tap.
-13. Delete from both the editor button and a card long press; confirm each dialog
-    names the note and deletion persists after restart.
+12. Long-press a card and confirm it toggles the star without opening or clearing
+    the note; confirm a short tap still opens it normally.
+13. Delete from the editor button; confirm the dialog names the note and deletion
+    persists after restart.
 14. In both title and body fields, place the caret by touch, drag the native
     selection handles, and test the Android Cut/Copy/Paste/Select all menu.
 15. Extend a title until it reaches 18-point text; confirm further typing and

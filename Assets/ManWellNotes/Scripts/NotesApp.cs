@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -30,6 +31,8 @@ namespace ManWellNotes
         [SerializeField] private TMP_Text notesHeading;
         [SerializeField] private TMP_Text emptyMessage;
         [SerializeField] private TMP_InputField searchField;
+        [SerializeField] private Texture2D clearSearchIconTexture;
+        [SerializeField] private NoteCardView noteCardPrefab;
 
         [Header("Editor")]
         [SerializeField] private GameObject editorPanel;
@@ -40,6 +43,10 @@ namespace ManWellNotes
         [SerializeField] private Button pinButton;
         [SerializeField] private TMP_Text pinButtonText;
         [SerializeField] private TMP_Text inputLimitMessage;
+
+        [Header("Starred note icons")]
+        [SerializeField] private Sprite pinnedIconBlack;
+        [SerializeField] private Sprite pinnedIconWhite;
 
         [Header("Delete confirmation")]
         [SerializeField] private GameObject deleteDialog;
@@ -61,6 +68,9 @@ namespace ManWellNotes
         private readonly List<NoteData> notes = new List<NoteData>();
         private readonly List<GameObject> noteCards = new List<GameObject>();
 
+        private RawImage searchIcon;
+        private Button clearSearchButton;
+        private Texture defaultSearchIconTexture;
         private NoteData selectedNote;
         private NoteData pendingDeleteNote;
         private string lastAcceptedTitle = string.Empty;
@@ -81,13 +91,14 @@ namespace ManWellNotes
             ConfigureTitleInput(titleField);
             ConfigureMobileInput(titleField);
             ConfigureMobileInput(bodyField);
+            ConfigureSaveButton();
             EnsureInputLimitMessage();
             EnsureBodyScrollbar();
             ConfigureEditorLayout();
 
             // A missing reference means the scene builder was not run or a required
             // object was deleted. We stop here instead of silently creating runtime UI.
-            if (font == null || notesContent == null || searchField == null || titleField == null ||
+            if (font == null || notesContent == null || searchField == null || noteCardPrefab == null || titleField == null ||
                 createdText == null || bodyField == null || bodyScrollbar == null ||
                 inputLimitMessage == null || deleteDialog == null ||
                 confirmDeleteButton == null || cancelDeleteButton == null)
@@ -97,6 +108,7 @@ namespace ManWellNotes
                 return;
             }
 
+            ConfigureSearchIcon();
             notes.AddRange(store.Load().Where(note => note != null));
             if (RepairMissingCreationDates())
                 store.Save(notes);
@@ -181,10 +193,10 @@ namespace ManWellNotes
             }
 
             SetPreferredWidth(toolbar, "Back to notes", 88f);
-            SetPreferredWidth(toolbar, "Pin", 72f);
+            SetPreferredWidth(toolbar, "Save", 72f);
             SetPreferredWidth(toolbar, "Delete", 84f);
             SetButtonPreserveAspect(toolbar, "Back to notes");
-            SetButtonPreserveAspect(toolbar, "Pin");
+            SetButtonPreserveAspect(toolbar, "Save");
             SetButtonPreserveAspect(toolbar, "Delete");
         }
 
@@ -208,17 +220,67 @@ namespace ManWellNotes
         // bindings here makes it easy to see which user action calls which method.
         private void BindEvents()
         {
-            searchField.onValueChanged.AddListener(_ => RefreshList());
+            searchField.onValueChanged.AddListener(OnSearchChanged);
+            if (clearSearchButton != null)
+                clearSearchButton.onClick.AddListener(ClearSearch);
             titleField.onValueChanged.AddListener(OnTitleChanged);
             bodyField.onValueChanged.AddListener(OnBodyChanged);
-            pinButton.onClick.AddListener(TogglePin);
+            pinButton.onClick.AddListener(SaveSelectedNote);
             confirmDeleteButton.onClick.AddListener(ConfirmDelete);
             cancelDeleteButton.onClick.AddListener(HideDeleteConfirmation);
 
             FindButton("New note")?.onClick.AddListener(CreateNewNote);
             FindButton("All notes")?.onClick.AddListener(ShowAllNotes);
-            FindButton("Pinned")?.onClick.AddListener(ShowPinnedNotes);
+            FindButton("Starred")?.onClick.AddListener(ShowStarredNotes);
             FindButton("Delete")?.onClick.AddListener(DeleteSelectedNote);
+        }
+
+        private void ConfigureSearchIcon()
+        {
+            Transform iconTransform = searchField.transform.Find("Search Icon");
+            searchIcon = iconTransform != null ? iconTransform.GetComponent<RawImage>() : null;
+            if (searchIcon == null)
+            {
+                Debug.LogWarning("Search Icon is missing or does not have a RawImage component.");
+                return;
+            }
+
+            defaultSearchIconTexture = searchIcon.texture;
+            clearSearchButton = searchIcon.GetComponent<Button>();
+            if (clearSearchButton == null)
+                clearSearchButton = searchIcon.gameObject.AddComponent<Button>();
+
+            clearSearchButton.targetGraphic = searchIcon;
+            clearSearchButton.transition = Selectable.Transition.None;
+            UpdateSearchIcon(searchField.text);
+        }
+
+        private void OnSearchChanged(string value)
+        {
+            UpdateSearchIcon(value);
+            RefreshList();
+        }
+
+        private void UpdateSearchIcon(string value)
+        {
+            if (searchIcon == null)
+                return;
+
+            bool hasSearchText = !string.IsNullOrEmpty(value);
+            searchIcon.texture = hasSearchText && clearSearchIconTexture != null
+                ? clearSearchIconTexture
+                : defaultSearchIconTexture;
+            searchIcon.raycastTarget = hasSearchText;
+            if (clearSearchButton != null)
+                clearSearchButton.interactable = hasSearchText;
+        }
+
+        private void ClearSearch()
+        {
+            searchField.SetTextWithoutNotify(string.Empty);
+            UpdateSearchIcon(string.Empty);
+            RefreshList();
+            searchField.ActivateInputField();
         }
 
         private Button FindButton(string objectName)
@@ -234,7 +296,7 @@ namespace ManWellNotes
 
             saveQueued = false;
             store.Save(notes);
-            SetStatus("Saved");
+            SetStatus(string.Empty);
         }
 
         private void LateUpdate()
@@ -336,9 +398,9 @@ namespace ManWellNotes
             allNotes.gameObject.name = "All notes";
             allNotes.GetComponent<LayoutElement>().preferredHeight = 44f;
 
-            Button pinned = CreateButton("Pinned", sidebar.transform, Ink, White, 18, FontStyles.Normal);
-            pinned.gameObject.name = "Pinned";
-            pinned.GetComponent<LayoutElement>().preferredHeight = 44f;
+            Button starred = CreateButton("Starred", sidebar.transform, Ink, White, 18, FontStyles.Normal);
+            starred.gameObject.name = "Starred";
+            starred.GetComponent<LayoutElement>().preferredHeight = 44f;
 
             GameObject flexible = new GameObject("Flexible space", typeof(RectTransform), typeof(LayoutElement));
             flexible.transform.SetParent(sidebar.transform, false);
@@ -435,7 +497,7 @@ namespace ManWellNotes
             toolbarLayout.childControlHeight = true;
             toolbarLayout.childForceExpandHeight = true;
 
-            pinButton = CreateButton("Pin", toolbar.transform, Soft, Ink, 17, FontStyles.Bold);
+            pinButton = CreateButton("Save", toolbar.transform, Soft, Ink, 17, FontStyles.Bold);
             pinButton.GetComponent<LayoutElement>().preferredWidth = 72f;
             pinButton.GetComponent<Image>().preserveAspect = true;
             pinButtonText = pinButton.GetComponentInChildren<TMP_Text>();
@@ -472,7 +534,7 @@ namespace ManWellNotes
             bodyScrollbar = BuildBodyScrollbar(bodyField);
 
             // The editor uses a vertical layout, so placing the existing toolbar last
-            // keeps Back, Pin and Delete at the bottom in newly generated scenes too.
+            // keeps Back, Save and Delete at the bottom in newly generated scenes too.
             toolbar.transform.SetAsLastSibling();
         }
 
@@ -651,6 +713,7 @@ namespace ManWellNotes
             ConfigureTitleInput(titleField);
             ConfigureMobileInput(titleField);
             ConfigureMobileInput(bodyField);
+            ConfigureSaveButton();
             EnsureBodyScrollbar();
             ConfigureEditorLayout();
 
@@ -697,12 +760,29 @@ namespace ManWellNotes
                 return;
 
             input.onFocusSelectAll = false;
+            // Ask the native keyboard to provide autocorrection and sentence
+            // capitalization according to the user's own keyboard settings.
+            // TMP preserves the field's existing single-line or multiline mode
+            // for the Autocorrected content type.
+            input.contentType = TMP_InputField.ContentType.Autocorrected;
             if (Application.platform == RuntimePlatform.Android ||
                 Application.platform == RuntimePlatform.IPhonePlayer)
             {
                 input.shouldHideMobileInput = false;
                 input.shouldHideSoftKeyboard = false;
             }
+        }
+
+        private void ConfigureSaveButton()
+        {
+            if (pinButton == null)
+                return;
+
+            pinButton.gameObject.name = "Save";
+            if (pinButtonText == null)
+                pinButtonText = pinButton.GetComponentInChildren<TMP_Text>();
+            if (pinButtonText != null)
+                pinButtonText.text = "Save";
         }
 
         private void ShowAllNotes()
@@ -712,9 +792,9 @@ namespace ManWellNotes
             pageNavigator.ShowNotesPage();
         }
 
-        private void ShowPinnedNotes()
+        private void ShowStarredNotes()
         {
-            searchField.text = "is:pinned";
+            searchField.text = "is:starred";
             RefreshList();
             pageNavigator.ShowNotesPage();
         }
@@ -784,17 +864,38 @@ namespace ManWellNotes
             SaveImmediately();
         }
 
-        private void TogglePin()
+        private void SaveSelectedNote()
         {
             if (selectedNote == null)
                 return;
 
-            selectedNote.pinned = !selectedNote.pinned;
-            selectedNote.modifiedUtcTicks = DateTime.UtcNow.Ticks;
-            pinButtonText.text = selectedNote.pinned ? "Pinned" : "Pin";
+            SaveImmediately();
             RefreshList();
-            QueueSave();
             pageNavigator.ShowNotesPage();
+        }
+
+        private void ToggleNotePinned(NoteData note, LongPressButton gesture)
+        {
+            if (note == null || !notes.Contains(note))
+                return;
+
+            note.pinned = !note.pinned;
+            note.modifiedUtcTicks = DateTime.UtcNow.Ticks;
+            SaveImmediately();
+            SetStatus(note.pinned ? "Starred" : "Unstarred");
+            StartCoroutine(RefreshListAfterLongPress(gesture));
+        }
+
+        private IEnumerator RefreshListAfterLongPress(LongPressButton gesture)
+        {
+            // Keep the pressed card alive until its Button has processed pointer-up.
+            // Replacing it while the gesture is active can turn the release into an
+            // ordinary click on a newly created card.
+            while (gesture != null && gesture.IsPointerDown)
+                yield return null;
+
+            yield return null;
+            RefreshList();
         }
 
         private void SelectNote(NoteData note, bool navigateToEditor = true)
@@ -810,7 +911,8 @@ namespace ManWellNotes
             lastAcceptedTitle = titleField.text;
             lastAcceptedBody = bodyField.text;
             createdText.text = FormatCreated(note);
-            pinButtonText.text = note.pinned ? "Pinned" : "Pin";
+            if (pinButtonText != null)
+                pinButtonText.text = "Save";
             HideInputLimitMessage();
             suppressEditorEvents = false;
             ResetBodyScrollToTop();
@@ -914,7 +1016,9 @@ namespace ManWellNotes
 
         private void CommitEditor()
         {
-            if (selectedNote == null || suppressEditorEvents)
+            // List-page gestures must never commit hidden or cleared editor fields.
+            if (selectedNote == null || suppressEditorEvents ||
+                editorPanel == null || !editorPanel.activeInHierarchy)
                 return;
 
             selectedNote.title = titleField.text;
@@ -933,10 +1037,10 @@ namespace ManWellNotes
             noteCards.Clear();
 
             string query = searchField != null ? searchField.text.Trim() : string.Empty;
-            bool pinnedOnly = string.Equals(query, "is:pinned", StringComparison.OrdinalIgnoreCase);
+            bool starredOnly = string.Equals(query, "is:starred", StringComparison.OrdinalIgnoreCase);
             IEnumerable<NoteData> filtered = SortedNotes();
 
-            if (pinnedOnly)
+            if (starredOnly)
                 filtered = filtered.Where(note => note.pinned);
             else if (!string.IsNullOrEmpty(query))
                 filtered = filtered.Where(note =>
@@ -944,7 +1048,7 @@ namespace ManWellNotes
                     (note.body ?? string.Empty).IndexOf(query, StringComparison.OrdinalIgnoreCase) >= 0);
 
             List<NoteData> visible = filtered.ToList();
-            notesHeading.text = pinnedOnly ? $"Pinned  {visible.Count}" : $"All notes  {visible.Count}";
+            notesHeading.text = starredOnly ? $"Starred  {visible.Count}" : $"All notes  {visible.Count}";
             emptyMessage.gameObject.SetActive(visible.Count == 0);
 
             foreach (NoteData note in visible)
@@ -957,46 +1061,39 @@ namespace ManWellNotes
         private void BuildNoteCard(NoteData note)
         {
             bool active = note == selectedNote;
-            GameObject cardObject = Panel("Note", notesContent, active ? Ink : Soft);
+            NoteCardView card = Instantiate(noteCardPrefab, notesContent);
+            GameObject cardObject = card.gameObject;
+            cardObject.name = "Note";
+            cardObject.SetActive(true);
             noteCards.Add(cardObject);
-            cardObject.AddComponent<LayoutElement>().preferredHeight = 132f;
 
-            Button button = cardObject.AddComponent<Button>();
-            ColorBlock colors = button.colors;
-            colors.normalColor = Color.white;
-            colors.highlightedColor = active ? new Color32(48, 48, 48, 255) : new Color32(225, 225, 225, 255);
-            colors.pressedColor = new Color32(195, 195, 195, 255);
-            button.colors = colors;
-            button.targetGraphic = cardObject.GetComponent<Image>();
-            LongPressButton longPress = cardObject.AddComponent<LongPressButton>();
-            longPress.LongPressed += () => ShowDeleteConfirmation(note);
-            button.onClick.AddListener(() =>
+            LongPressButton longPress = card.LongPressButton;
+            longPress.LongPressed += () => ToggleNotePinned(note, longPress);
+            card.OpenButton.onClick.AddListener(() =>
             {
                 if (!longPress.ConsumeSuppressedClick())
                     SelectNote(note);
             });
 
             string title = string.IsNullOrWhiteSpace(note.title) ? "Untitled note" : note.title.Trim();
-            if (note.pinned)
-                title = "PINNED  ·  " + title;
-            TMP_Text titleText = Label(title, cardObject.transform, 20, FontStyles.Bold, active ? White : Ink);
-            SetCardTextRect(titleText, 16f, 16f, 12f, 30f);
-            titleText.enableAutoSizing = true;
-            titleText.fontSizeMax = 20f;
-            titleText.fontSizeMin = 16f;
-
             string preview = string.IsNullOrWhiteSpace(note.body)
                 ? "No additional text"
                 : note.body.Replace("\r", " ").Replace("\n", " ").Trim();
-            TMP_Text previewText = Label(preview, cardObject.transform, 17, FontStyles.Normal, active ? new Color32(210, 210, 210, 255) : Muted);
-            SetCardTextRect(previewText, 16f, 16f, 48f, 25f);
 
-            TMP_Text dateText = Label(FormatCreated(note), cardObject.transform, 15, FontStyles.Normal, active ? new Color32(190, 190, 190, 255) : Muted);
-            SetCardTextRect(dateText, 16f, 16f, 83f, 24f);
-
-            titleText.ForceMeshUpdate(true, true);
-            previewText.ForceMeshUpdate(true, true);
-            dateText.ForceMeshUpdate(true, true);
+            card.Present(
+                title,
+                preview,
+                FormatCreated(note),
+                note.pinned,
+                active,
+                pinnedIconBlack,
+                pinnedIconWhite,
+                Ink,
+                Soft,
+                White,
+                Ink,
+                new Color32(210, 210, 210, 255),
+                Muted);
         }
 
         private List<NoteData> SortedNotes()
@@ -1039,20 +1136,6 @@ namespace ManWellNotes
             return $"Created {created:MMM d, yyyy} · {created:h:mm tt}";
         }
 
-        private static void SetCardTextRect(TMP_Text text, float left, float right, float top, float height)
-        {
-            RectTransform rect = text.rectTransform;
-            rect.anchorMin = new Vector2(0f, 1f);
-            rect.anchorMax = Vector2.one;
-            rect.pivot = new Vector2(0.5f, 1f);
-            rect.offsetMin = new Vector2(left, -top - height);
-            rect.offsetMax = new Vector2(-right, -top);
-
-            text.enableAutoSizing = false;
-            text.textWrappingMode = TextWrappingModes.NoWrap;
-            text.overflowMode = TextOverflowModes.Ellipsis;
-        }
-
         private void QueueSave()
         {
             // Waiting briefly prevents a disk write for every individual keystroke.
@@ -1067,7 +1150,7 @@ namespace ManWellNotes
                 CommitEditor();
             saveQueued = false;
             store.Save(notes);
-            SetStatus("Saved");
+            SetStatus(string.Empty);
         }
 
         private void SetStatus(string value)

@@ -26,6 +26,9 @@ namespace ManWellNotesEditor
             RequireReference(data, "deleteDialogMessage");
             RequireReference(data, "confirmDeleteButton");
             RequireReference(data, "cancelDeleteButton");
+            RequireReference(data, "noteCardPrefab");
+            RequireReference(data, "pinnedIconBlack");
+            RequireReference(data, "pinnedIconWhite");
             TMP_Text limitMessage =
                 data.FindProperty("inputLimitMessage").objectReferenceValue as TMP_Text;
             if (limitMessage == null || limitMessage.color.r <= limitMessage.color.g)
@@ -83,7 +86,7 @@ namespace ManWellNotesEditor
                 toolbarLayout.childForceExpandWidth)
                 throw new InvalidOperationException("The editor toolbar can place Delete off-screen.");
 
-            string[] toolbarButtonNames = { "Back to notes", "Pin", "Delete" };
+            string[] toolbarButtonNames = { "Back to notes", "Save", "Delete" };
             if (toolbarButtonNames.Any(buttonName =>
             {
                 Transform button = toolbar != null ? toolbar.Find(buttonName) : null;
@@ -98,6 +101,7 @@ namespace ManWellNotesEditor
                 throw new InvalidOperationException("The obsolete custom clipboard toolbar still exists.");
 
             NoteData note = NoteData.Create();
+            note.pinned = true;
             note.title = "A deliberately long visible note title for card validation";
             note.body = "Visible preview text";
 
@@ -114,6 +118,9 @@ namespace ManWellNotesEditor
                 : null;
             if (card == null || card.GetComponent<LongPressButton>() == null)
                 throw new InvalidOperationException("Runtime card or long-press control was not created.");
+
+            if (card.Find("Starred icon")?.GetComponent<Image>()?.sprite == null)
+                throw new InvalidOperationException("The starred-note icon is not configured on note cards.");
 
             TMP_Text[] labels = card.GetComponentsInChildren<TMP_Text>(true);
             if (labels.Length != 3 || labels.Any(label =>

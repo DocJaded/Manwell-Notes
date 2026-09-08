@@ -58,7 +58,7 @@ namespace ManWellNotesEditor
             Button notesBack = GetOrCreateBackButton(
                 notesPage.transform,
                 "Back to library",
-                "‹  Notes",
+                "‹  Back",
                 font,
                 Color.black,
                 Color.white,
@@ -72,6 +72,8 @@ namespace ManWellNotesEditor
                 Color.black,
                 Color.white,
                 false);
+
+            ConfigureNotesHeader(notesPage.transform, notesBack, editorBack, font);
 
             NotesPageNavigator navigator = root.GetComponent<NotesPageNavigator>();
             if (navigator == null)
@@ -89,6 +91,7 @@ namespace ManWellNotesEditor
             appData.FindProperty("pageNavigator").objectReferenceValue = navigator;
             appData.FindProperty("createdText").objectReferenceValue = createdText;
             appData.ApplyModifiedPropertiesWithoutUndo();
+            NotesSceneBuilder.AssignPinnedIcons(notesApp);
 
             ApplyAccessibleTypography(root);
             notesApp.UpgradeInteractionInterface();
@@ -135,10 +138,10 @@ namespace ManWellNotesEditor
                         SetTextFontSize(text, 19f);
                         break;
                     case "All notes":
-                    case "Pinned":
+                    case "Starred":
                         SetTextFontSize(text, 18f);
                         break;
-                    case "Pin":
+                    case "Save":
                     case "Delete":
                         SetTextFontSize(text, 17f);
                         break;
@@ -241,6 +244,7 @@ namespace ManWellNotesEditor
             if (input == null)
                 return;
 
+            input.contentType = TMP_InputField.ContentType.Autocorrected;
             SerializedObject inputData = new SerializedObject(input);
             inputData.FindProperty("m_HideMobileInput").boolValue = false;
             inputData.FindProperty("m_HideSoftKeyboard").boolValue = false;
@@ -285,7 +289,8 @@ namespace ManWellNotesEditor
             Color foreground,
             bool verticalLayout)
         {
-            Transform existing = parent.Find(objectName);
+            Transform existing = parent.GetComponentsInChildren<Transform>(true)
+                .FirstOrDefault(item => item.name == objectName);
             GameObject buttonObject;
 
             if (existing != null)
@@ -341,6 +346,83 @@ namespace ManWellNotesEditor
             buttonObject.transform.SetSiblingIndex(0);
             EditorUtility.SetDirty(buttonObject);
             return button;
+        }
+
+        private static void ConfigureNotesHeader(
+            Transform notesPage,
+            Button notesBack,
+            Button editorBack,
+            TMP_FontAsset font)
+        {
+            Transform existingHeader = notesPage.Find("Notes header");
+            GameObject header = existingHeader != null
+                ? existingHeader.gameObject
+                : new GameObject(
+                    "Notes header",
+                    typeof(RectTransform),
+                    typeof(HorizontalLayoutGroup),
+                    typeof(LayoutElement));
+
+            header.transform.SetParent(notesPage, false);
+            header.transform.SetSiblingIndex(0);
+
+            HorizontalLayoutGroup layout = header.GetComponent<HorizontalLayoutGroup>();
+            layout.padding = new RectOffset(0, 0, 0, 0);
+            layout.spacing = 12f;
+            layout.childAlignment = TextAnchor.MiddleLeft;
+            layout.childControlWidth = true;
+            layout.childControlHeight = true;
+            layout.childForceExpandWidth = false;
+            layout.childForceExpandHeight = true;
+            header.GetComponent<LayoutElement>().preferredHeight = 64f;
+
+            notesBack.transform.SetParent(header.transform, false);
+            notesBack.transform.SetSiblingIndex(0);
+            LayoutElement backSize = notesBack.GetComponent<LayoutElement>();
+            backSize.preferredWidth = 88f;
+            backSize.preferredHeight = -1f;
+
+            Image notesImage = notesBack.GetComponent<Image>();
+            Image editorImage = editorBack.GetComponent<Image>();
+            notesImage.sprite = editorImage.sprite;
+            notesImage.type = editorImage.type;
+            notesImage.preserveAspect = editorImage.preserveAspect;
+            notesImage.color = editorImage.color;
+
+            TMP_Text backLabel = notesBack.GetComponentInChildren<TMP_Text>(true);
+            TMP_Text editorBackLabel = editorBack.GetComponentInChildren<TMP_Text>(true);
+            backLabel.text = "‹  Back";
+            backLabel.font = editorBackLabel.font;
+            backLabel.fontSize = editorBackLabel.fontSize;
+            backLabel.fontStyle = editorBackLabel.fontStyle;
+            backLabel.color = editorBackLabel.color;
+
+            Transform existingTitle = header.transform.Find("Notes title");
+            GameObject titleObject = existingTitle != null
+                ? existingTitle.gameObject
+                : new GameObject(
+                    "Notes title",
+                    typeof(RectTransform),
+                    typeof(CanvasRenderer),
+                    typeof(TextMeshProUGUI),
+                    typeof(LayoutElement));
+            titleObject.transform.SetParent(header.transform, false);
+            titleObject.transform.SetSiblingIndex(1);
+
+            TMP_Text title = titleObject.GetComponent<TMP_Text>();
+            title.text = "Notes";
+            title.font = font;
+            title.fontSize = 30f;
+            title.fontStyle = FontStyles.Bold;
+            title.color = Color.black;
+            title.alignment = TextAlignmentOptions.MidlineLeft;
+            title.raycastTarget = false;
+            title.textWrappingMode = TextWrappingModes.NoWrap;
+            titleObject.GetComponent<LayoutElement>().flexibleWidth = 1f;
+
+            EditorUtility.SetDirty(header);
+            EditorUtility.SetDirty(notesBack);
+            EditorUtility.SetDirty(titleObject);
         }
 
         private static GameObject RequireObject(string name)

@@ -28,7 +28,7 @@ namespace ManWellNotesEditor
                 throw new System.InvalidOperationException("The editor Toolbar is not a direct child of Editor.");
 
             // A VerticalLayoutGroup displays children in sibling order. Keeping the
-            // same toolbar and moving it last places Back, Pin and Delete at the bottom.
+            // same toolbar and moving it last places Back, Save and Delete at the bottom.
             toolbar.transform.SetAsLastSibling();
 
             // This is a normal serialized scene component. At runtime it only changes

@@ -10,6 +10,8 @@ namespace ManWellNotes
 
         public event Action LongPressed;
 
+        public bool IsPointerDown => pointerDown;
+
         private bool pointerDown;
         private bool longPressTriggered;
         private bool suppressNextClick;
