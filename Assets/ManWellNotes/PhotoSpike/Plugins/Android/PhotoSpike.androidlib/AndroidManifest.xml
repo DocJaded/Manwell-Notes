@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+  <queries>
+    <intent><action android:name="android.media.action.IMAGE_CAPTURE" /></intent>
+    <intent><action android:name="android.provider.action.PICK_IMAGES" /><data android:mimeType="image/*" /></intent>
+  </queries>
+  <application>
+    <activity android:name="com.manwell.photospike.PhotoActivity"
+              android:exported="false" android:theme="@android:style/Theme.Material.Light.NoActionBar" />
+    <provider android:name="com.manwell.photospike.CaptureProvider"
+              android:authorities="${applicationId}.photospike.capture"
+              android:exported="false" android:grantUriPermissions="true" />
+  </application>
+</manifest>

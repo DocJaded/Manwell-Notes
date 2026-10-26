@@ -1,13 +1,17 @@
 # Note photos — implementation plan
 
-Status: Planning only. No feature implementation has been made.
-Date: 8 September 2026
+Status: Production feature planned; isolated Android test built and under user testing.
+Updated: 26 October 2026
+
+Device-test progress: the user confirmed successful camera access/capture and stored-image selection/inclusion on 10 September. On 26 October, the user confirmed No preserves the picture, Yes followed by source cancellation preserves it, and successful replacement persists after restart. The test currently accepts PNG/JPG only. Orientation and interruption handling are not yet confirmed on the phone; see PHOTO_TEST_GUIDE.md for the checklist.
 
 ## 1. Agreed scope
 
 Add still images below a note's text. The user taps **Add photo**, then chooses **Take photo** or **Choose image**. An accepted camera shot or selected image is copied into the app's private storage and saved with the current note automatically.
 
-Support multiple images in insertion order, thumbnail previews, tap to enlarge, and removal with confirmation. The original gallery image remains untouched. Cancelling the camera or picker returns to the same note without adding anything.
+Allow **at most one picture per note**, with a preview below the text, tap to enlarge, and removal with confirmation. The original gallery image remains untouched.
+
+When a picture already exists and the user chooses Take photo or Choose image, show a saved confirmation window with the exact message **“The existing picture will be replaced”** and **Yes / No** buttons. Yes opens the chosen source; No closes the window and keeps the current picture. Android Back also acts as No. Adding the first picture needs no replacement confirmation. Keep the existing picture until a new image has been accepted, imported, and saved successfully. Cancelling the camera/picker or any import/save failure must preserve the existing picture.
 
 First target: the existing Android app. Unity Editor support is for previewing and testing the interface with sample images; desktop camera integration is outside this first version.
 
@@ -21,12 +25,12 @@ Excluded: videos, clipboard image paste, inline images between paragraphs, rich 
 - Expose references through serialized Inspector fields. Wire fixed button actions through Inspector events where practical; avoid also registering the same action in code.
 - Use standard RectTransform, LayoutElement, layout groups, ScrollRect, RawImage, Button, and TextMesh Pro components.
 - Store dimensions, spacing, colors, fonts, anchors, and thumbnail presentation in scenes/prefabs. Do not overwrite them in Awake, Start, or refresh methods.
-- Instantiate the saved photo-card prefab for each attached image, just as the existing app instantiates its note-card prefab. Runtime code supplies the image and its associated data; it does not construct the card's visual children.
-- Save the source-choice dialog, enlarged-photo viewer, and removal dialog in the scene, initially inactive. Runtime code may show and hide them.
+- Place one saved photo-card prefab instance beneath the text. Runtime code supplies the picture and shows/hides this instance; it does not construct visual children or create a list of cards.
+- Save the source-choice dialog, replacement confirmation, enlarged-photo viewer, and removal dialog in the scene, initially inactive. Runtime code may show and hide them. The replacement message and Yes/No labels remain editable in Unity.
 - Missing references should produce an actionable Editor validation error, not silently generate replacement UI during play.
 - An optional one-time Editor setup command may create missing assets and assign references. It must use Undo, preserve existing assets and manual edits, and never run automatically on startup or on entering Play Mode.
 
-Runtime code is still necessary for device integration, reading and writing images, creating the appropriate number of prefab instances, and responding to user actions. Minimize runtime UI construction, rather than trying to eliminate necessary application behavior.
+Runtime code is still necessary for device integration, reading and writing images, binding the saved preview, and responding to user actions. Minimize runtime UI construction, rather than trying to eliminate necessary application behavior.
 
 ## 3. Current project integration points
 
@@ -50,16 +54,16 @@ Proposed hierarchy within the existing editor page:
 Editor page
   Existing toolbar, title and date
   Existing text editor and scrollbar
-  Photos section
+  Photo section
     Add photo button
-    Photo strip (horizontal ScrollRect)
-      Viewport
-        Content (HorizontalLayoutGroup)
-          Photo Card instances
+    Photo Card (one saved prefab instance)
 
 Dialog layer
   Photo source dialog
     Take photo / Choose image / Cancel
+  Replace picture confirmation
+    The existing picture will be replaced
+    Yes / No
   Photo viewer
     Image / Close
   Remove photo confirmation
@@ -67,13 +71,13 @@ Dialog layer
   Photo operation feedback
 ```
 
-Use a compact horizontal photo strip below the existing text editor. This preserves the text editor's vertical scrolling and avoids introducing competing vertical scroll areas. Keep Add photo visible for notes without images; hide the empty strip. Verify this arrangement at the app's small portrait reference size before committing to dimensions.
+Use one compact photo preview below the existing text editor, without a photo strip or separate image scrolling. Keep Add photo visible for notes without a picture; hide the empty preview. Verify this arrangement at the app's small portrait reference size before committing to dimensions.
 
 Create `Assets/ManWellNotes/Prefabs/Photo Card.prefab` with a thumbnail RawImage, an open button, a separate remove button, and a saved placeholder for an unreadable image. Preserve aspect ratio without stretching. Keep the card geometry editable in the prefab.
 
 Proposed supporting components:
 
-- **NotePhotosController:** binds the current note's attachments to the saved UI, coordinates add/remove requests, and manages loading feedback.
+- **NotePhotoController:** binds the current note's optional picture to the saved UI, coordinates add/replace/remove requests, and manages loading feedback.
 - **PhotoCardView:** holds the prefab references and presents one attachment.
 - **PhotoViewer:** displays a single image in the saved overlay and handles closing it.
 - **NoteImageStore:** owns image files, thumbnails, import validation, and cleanup.
@@ -99,7 +103,7 @@ Account for Android suspending or recreating the app while the camera is open. R
 
 ## 6. Data and file storage
 
-Add an ordered attachment list to NoteData. Each record contains a stable attachment ID, relative image path, relative thumbnail path, and image dimensions. Treat a missing or null list in existing JSON as an empty list so older notes continue to load.
+Add one optional picture record to NoteData, containing a stable image ID, relative image path, relative thumbnail path, and image dimensions. A missing or empty record means no picture, so older text-only notes continue to load. Enforce one picture in the data model and save operations, not just in the UI; confirm JsonUtility's missing-record behavior with an old-note fixture.
 
 Suggested private storage:
 
@@ -108,8 +112,8 @@ Application.persistentDataPath/
   man-well-notes.json
   images/
     <note-id>/
-      <attachment-id>.jpg or .png
-      <attachment-id>-thumb.jpg or .png
+      <image-id>.jpg or .png
+      <image-id>-thumb.jpg or .png
   pending-photo.json
   pending-images/
 ```
@@ -124,6 +128,7 @@ Proposed initial import settings, exposed in the Inspector:
 | Thumbnail long edge | 320 pixels |
 | JPEG quality | 85 |
 | Images selected per request | 1 |
+| Pictures saved per note | 1 |
 
 Validate these defaults on a representative phone before release. Downsample before allocating a full-resolution texture where possible, apply orientation before re-encoding, and preserve transparency using PNG when required. Define source-byte and decoded-pixel safety limits during the device spike and expose them as settings. Handle unsupported or corrupt files with a short user-facing message. Validate decoded content as well as picker MIME type; reject videos and animated image formats in this first version. Normalize supported phone formats to JPEG/PNG; do not promise HEIC support until tested with the chosen decoder.
 
@@ -133,15 +138,15 @@ NoteStore.Save currently catches errors and returns no success result. Adjust th
 
 Import transaction:
 
-1. Capture/select into temporary storage and validate the result.
+1. If the note already has a picture, obtain Yes from the replacement confirmation before opening the chosen source. Capture/select into temporary storage and validate the result.
 2. Write the normalized image and thumbnail completely.
-3. Add the attachment metadata and update the note's modified timestamp.
+3. Set the single picture record to the new image and update the note's modified timestamp, retaining the previous record for rollback.
 4. Persist notes using a temporary JSON file and a platform-tested replacement/recovery strategy.
-5. Present the attachment as saved only after persistence succeeds. On failure, roll back metadata and clean up unreferenced imported files; keep the note text intact.
+5. Present the picture as saved only after persistence succeeds. Only then remove the replaced image and its thumbnail. On failure, restore the previous record and clean up the failed new import; preserve both note text and the existing picture. Use distinct generated filenames so an import never overwrites the current file before the transaction succeeds.
 
 For attachment or note deletion, persist the metadata removal successfully before deleting its image files. Restore in-memory state if persistence fails. If file deletion fails after the metadata save, leave cleanup for a later safe pass. Only remove files in the app-managed image directory that are demonstrably unreferenced; exclude pending operations. Never run orphan cleanup after a failed JSON load that could otherwise look like an empty notebook.
 
-Load thumbnails for the current note and load the larger image only while the viewer needs it. Release owned runtime textures when cards or viewer content are replaced. Do not load every note's full-size images at launch. A missing file should show a placeholder without breaking text editing.
+Load the current note's thumbnail and load its larger image only while the viewer needs it. Release owned runtime textures when the preview or viewer content is replaced. Do not load every note's full-size image at launch. A missing file should show a placeholder without breaking text editing and still require confirmation before replacing its saved record.
 
 ## 8. Implementation order
 
@@ -158,13 +163,15 @@ Do not rebuild the entire existing interface as a shortcut. If the old rebuild c
 - Existing text-only notes load and save without losing fields or text.
 - Create “Xmas gift for wife,” take a photo, accept it, and see it below the text. Restart the app and verify both persist.
 - Choose a stored image, restart, and verify it remains available after the original gallery item is removed.
-- Add several images, switch notes, and verify correct note ownership and insertion order.
+- Add the first picture without a replacement prompt. Attempt a second picture through both camera and chooser; verify the exact warning and Yes/No buttons.
+- Choose No or press Android Back; the picture stays unchanged and no source opens. Choose Yes, then cancel the source or encounter an import/save failure; the existing picture still remains.
+- Complete a replacement, restart, and verify exactly one picture is associated with that note. Switch notes and verify correct ownership.
 - Cancel camera/picker, deny any required access, or attempt an unavailable source; the note remains usable and no empty attachment appears.
 - Background or recreate the app during capture; recover safely without wrong-note attachment or duplicate images.
 - Exercise low-storage/save failure, corrupt images, missing files, and failed cleanup. No false save confirmation or loss of existing text/images.
 - Remove an image and delete a note; only the corresponding app-owned files are removed after a successful save.
 - Verify portrait/landscape source photos, transparency, very large images, unsupported formats, and video rejection.
-- Verify thumbnail scrolling, enlarged view, removal controls, keyboard open/closed, and Android Back on a small portrait screen.
+- Verify the single preview, replacement confirmation, enlarged view, removal controls, keyboard open/closed, and Android Back on a small portrait screen.
 - Change thumbnail size, spacing, button labels/colors, and viewer layout in the Unity Editor. Enter/exit Play Mode and confirm the saved settings are respected.
 - Test repeated viewer opening and note switching for accumulating texture memory.
 
@@ -172,4 +179,4 @@ Use focused automated tests for old-data compatibility, failed-save rollback, no
 
 ## 10. Definition of done
 
-The Android app can capture or choose still images, save them privately with the intended note, reopen them after restart, and remove them safely. The complete photo interface is inspectable and editable in saved Unity assets. The handover lists assigned references, Inspector settings, Android integration details, tested devices, supported source formats, and any remaining limitations.
+The Android app can capture or choose one still picture per note, ask before replacement, save it privately with the intended note, reopen it after restart, and remove it safely. Rejected, cancelled, or failed replacements preserve the existing picture. The complete photo interface is inspectable and editable in saved Unity assets. The handover lists assigned references, Inspector settings, Android integration details, tested devices, supported source formats, and any remaining limitations.
