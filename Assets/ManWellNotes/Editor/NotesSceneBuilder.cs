@@ -24,11 +24,13 @@ namespace ManWellNotesEditor
         public static void Build()
         {
             Scene scene = EditorSceneManager.OpenScene(ScenePath, OpenSceneMode.Single);
-            TMP_FontAsset primaryFont = NotesFontBuilder.BuildPrimaryFont();
 
             // Rebuilding is intentional: remove only the app root and leave cameras,
             // lighting, and any unrelated objects in the scene untouched.
             GameObject oldRoot = GameObject.Find(RootName);
+            if (oldRoot != null && oldRoot.GetComponent<NotePhotoController>() != null)
+                throw new System.InvalidOperationException("This scene has an editable photo interface. Edit its saved prefabs or use Photos/Add Missing Photo Interface; rebuilding the old interface would remove it.");
+            TMP_FontAsset primaryFont = NotesFontBuilder.BuildPrimaryFont();
             if (oldRoot != null)
                 Object.DestroyImmediate(oldRoot);
 

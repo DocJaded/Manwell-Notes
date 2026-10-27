@@ -1,6 +1,6 @@
 # Man-Well Notes — Project Handover
 
-Last updated: 19 August 2026  
+Last updated: 27 October 2026
 Unity version: 6000.3.7f1  
 Repository: `https://github.com/DocJaded/Manwell-Notes.git`  
 Primary branch: `main`
@@ -15,8 +15,13 @@ pages:
 2. Notes list — search, note cards, and navigation back to the library.
 3. Editor — title, creation timestamp, body, Save, Delete, and Back.
 
-Notes are stored locally as JSON. There is currently no account, cloud sync,
-encryption, export, import, backup, or conflict handling.
+Notes are stored locally as JSON with a previous-save recovery backup. There is
+currently no account, cloud sync, encryption, export, or user-facing backup/import.
+The user approved bringing photos, pinch zoom and sound recording from the preview
+into the normal app. Version 0.2.0 (code 2) uses the original app identity and signing
+certificate; see APP_UPDATE_0.2.0.md for installation and build instructions.
+See SOUND_RECORDING_GUIDE.md and PHOTO_INTEGRATION_GUIDE.md
+for the editable Unity assets, storage behavior, build commands and test checklist.
 
 The only enabled build scene is:
 
@@ -306,8 +311,8 @@ Current settings:
 - Application ID: `com.manwell.notes`
 - Product: `Man-Well Notes`
 - Company: `Man-Well`
-- Version name: `0.1.0`
-- Version code: `1`
+- Version name: `0.2.0`
+- Version code: `2`
 - Minimum Android API: 26
 - Target API: Auto
 - Architecture: ARM64
@@ -323,7 +328,8 @@ The Activity entry point is intentional. Unity's GameActivity always hides the
 native keyboard input field, which prevents the familiar Android selection handles
 and floating Cut/Copy/Paste/Select all menu used by this app.
 
-The previous APK in `Release_APK` was built before icon cleanup and is stale. APK,
+The current normal-app output is `Release_APK/ManWellNotes-0.2.0.apk`; the older
+`ManWellNotes.apk` is retained as an earlier build and signing reference. APK,
 AAB, `Release_APK`, `Library`, `Temp`, and Logs are intentionally ignored by Git.
 
 ## 10. Build-size and build-time pitfalls
@@ -388,7 +394,7 @@ next build substantially slower.
 - All notes live in memory and the entire collection is rewritten on save.
 - Current app-category settings still identify the Android build as a game in parts
   of Unity's generated settings; review store metadata before release.
-- Signing/release keystore configuration has not been documented or committed.
+- Direct-install updates retain the existing Android debug signing certificate; see APP_UPDATE_0.2.0.md. Play Store release signing is not configured.
 
 ## 13. Minimum manual smoke test
 

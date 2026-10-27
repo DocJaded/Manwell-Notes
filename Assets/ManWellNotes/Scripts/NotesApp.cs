@@ -59,6 +59,14 @@ namespace ManWellNotes
 
         [Header("Page navigation")]
         [SerializeField] private NotesPageNavigator pageNavigator;
+        [Header("Note picture")]
+        [SerializeField] private NotePhotoController photoController;
+        [SerializeField] private NoteAudioController audioController;
+
+        public NoteData SelectedNote => selectedNote;
+        public IReadOnlyList<NoteData> Notes => notes;
+        public NoteStore Store => store;
+        public event Action CurrentNoteChanged;
 
         [Header("Typography")]
         [Tooltip("Sekaiwo is the primary face. Its saved TMP asset contains the Noto fallback chain.")]
@@ -94,7 +102,7 @@ namespace ManWellNotes
             ConfigureSaveButton();
             EnsureInputLimitMessage();
             EnsureBodyScrollbar();
-            ConfigureEditorLayout();
+            // Layout is authored in the saved scene; do not overwrite Inspector edits here.
 
             // A missing reference means the scene builder was not run or a required
             // object was deleted. We stop here instead of silently creating runtime UI.
@@ -110,6 +118,7 @@ namespace ManWellNotes
 
             ConfigureSearchIcon();
             notes.AddRange(store.Load().Where(note => note != null));
+            if (!store.LoadSucceeded) SetStatus(store.LastError);
             if (RepairMissingCreationDates())
                 store.Save(notes);
             BindEvents();
@@ -295,8 +304,8 @@ namespace ManWellNotes
                 return;
 
             saveQueued = false;
-            store.Save(notes);
-            SetStatus(string.Empty);
+            if (store.Save(notes)) SetStatus(string.Empty);
+            else SetStatus(store.LastError);
         }
 
         private void LateUpdate()
@@ -844,9 +853,25 @@ namespace ManWellNotes
             if (note == null || !notes.Contains(note))
                 return;
 
+            if (audioController != null && audioController.Protects(note.id))
+            {
+                photoController?.ShowMessage("Stop and save the recording before deleting this note.");
+                return;
+            }
+
             int oldIndex = SortedNotes().IndexOf(note);
             bool deletedSelectedNote = note == selectedNote;
+            CommitEditor();
+            int originalIndex = notes.IndexOf(note);
             notes.Remove(note);
+            if (!store.Save(notes))
+            {
+                notes.Insert(originalIndex, note);
+                SetStatus(store.LastError);
+                photoController?.ShowMessage(store.LastError);
+                return;
+            }
+            saveQueued = false;
             if (deletedSelectedNote)
                 selectedNote = null;
             RefreshList();
@@ -861,7 +886,8 @@ namespace ManWellNotes
             }
 
             pageNavigator.ShowNotesPage();
-            SaveImmediately();
+            photoController?.CleanupFiles();
+            audioController?.CleanupFiles();
         }
 
         private void SaveSelectedNote()
@@ -869,7 +895,7 @@ namespace ManWellNotes
             if (selectedNote == null)
                 return;
 
-            SaveImmediately();
+            if (!TrySaveNotes()) return;
             RefreshList();
             pageNavigator.ShowNotesPage();
         }
@@ -917,6 +943,7 @@ namespace ManWellNotes
             suppressEditorEvents = false;
             ResetBodyScrollToTop();
             editorPanel.SetActive(true);
+            CurrentNoteChanged?.Invoke();
             RefreshList();
 
             if (navigateToEditor)
@@ -935,6 +962,7 @@ namespace ManWellNotes
             suppressEditorEvents = false;
             ResetBodyScrollToTop();
             editorPanel.SetActive(false);
+            CurrentNoteChanged?.Invoke();
         }
 
         private void OnTitleChanged(string value)
@@ -1144,13 +1172,78 @@ namespace ManWellNotes
             SetStatus("Saving…");
         }
 
-        private void SaveImmediately()
+        private void SaveImmediately() => TrySaveNotes();
+
+        public bool TrySaveNotes()
         {
+            if (store == null) return false;
             if (titleField != null)
                 CommitEditor();
             saveQueued = false;
-            store.Save(notes);
-            SetStatus(string.Empty);
+            bool saved = store.Save(notes);
+            SetStatus(saved ? string.Empty : store.LastError);
+            return saved;
+        }
+
+        public NoteData FindNote(string id) => notes.FirstOrDefault(note => note.id == id);
+
+        public NoteData CreateRecordingNote(string timestamp)
+        {
+            if (!TrySaveNotes()) return null;
+            var note = NoteData.Create();
+            note.title = timestamp;
+            note.body = string.Empty;
+            notes.Add(note);
+            if (!store.Save(notes)) { notes.Remove(note); return null; }
+            if (searchField != null) searchField.text = string.Empty;
+            if (titleField != null) SelectNote(note);
+            return note;
+        }
+
+        public bool TrySetAudio(string noteId, string expectedId, NoteAudioData audio)
+        {
+            var note = FindNote(noteId);
+            if (note == null || (note.audio?.id ?? "") != (expectedId ?? "")) return false;
+            var previous = note.audio;
+            long modified = note.modifiedUtcTicks;
+            note.audio = audio;
+            note.modifiedUtcTicks = DateTime.UtcNow.Ticks;
+            if (!TrySaveNotes()) { note.audio = previous; note.modifiedUtcTicks = modified; return false; }
+            RefreshList();
+            CurrentNoteChanged?.Invoke();
+            return true;
+        }
+
+        public void EndEditingForPhoto()
+        {
+            CommitEditor();
+            titleField.DeactivateInputField();
+            bodyField.DeactivateInputField();
+        }
+
+        public bool TrySetPhoto(string noteId, string expectedPhotoId, NotePhotoData photo, out string error)
+        {
+            NoteData note = FindNote(noteId);
+            if (note == null || NotePhotoData.Identity(note.photo) != (expectedPhotoId ?? string.Empty))
+            {
+                error = "This note or its picture changed. Please try again.";
+                return false;
+            }
+            var previous = note.photo;
+            long modified = note.modifiedUtcTicks;
+            note.photo = photo;
+            note.modifiedUtcTicks = DateTime.UtcNow.Ticks;
+            if (!TrySaveNotes())
+            {
+                note.photo = previous;
+                note.modifiedUtcTicks = modified;
+                error = store.LastError;
+                return false;
+            }
+            error = null;
+            RefreshList();
+            CurrentNoteChanged?.Invoke();
+            return true;
         }
 
         private void SetStatus(string value)

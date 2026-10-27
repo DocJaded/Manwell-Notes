@@ -28,7 +28,7 @@ Output: `Release_APK/NotesPhotoTest.apk`.
 
 Install this APK on the phone and open **Notes Photo Test**. Its application ID is `com.manwell.notes.phototest`, separate from the notes app's `com.manwell.notes`. It uses separate private storage and can be installed alongside the notes app. It is an ARM64 development build, requiring Android 8/API 26 or newer.
 
-The build command supplies the test scene explicitly; it does not replace the production build scene list. It temporarily enables the test's native Android library and restores the original build settings afterward. The library is disabled for ordinary builds. A build guard rejects an accidentally enabled test library when building the production app ID.
+The build command supplies the test scene explicitly; it does not replace the production build scene list. It temporarily enables the native Android library and restores the original build settings afterward. Since the 26 October integration, this library is shared with the normal notes app and its separate integrated preview. The build guard accepts those three app IDs. See PHOTO_INTEGRATION_GUIDE.md for the integrated preview.
 
 ## Phone checklist
 

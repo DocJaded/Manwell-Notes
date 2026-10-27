@@ -16,6 +16,8 @@ namespace ManWellNotes
         [Header("Saved scene navigation buttons")]
         [SerializeField] private Button notesBackButton;
         [SerializeField] private Button editorBackButton;
+        [SerializeField] private NotePhotoController photoController;
+        [SerializeField] private NoteAudioController audioController;
 
         private Page currentPage;
 
@@ -40,6 +42,9 @@ namespace ManWellNotes
             if (Keyboard.current == null || !Keyboard.current.escapeKey.wasPressedThisFrame)
                 return;
 
+            if (photoController != null && photoController.TryCloseTopDialog()) return;
+            if (audioController != null && audioController.TryCloseDialog()) return;
+
             switch (currentPage)
             {
                 case Page.Editor:
@@ -62,6 +67,8 @@ namespace ManWellNotes
 
         private void Show(Page page)
         {
+            photoController?.CloseDialogs();
+            audioController?.CloseDialog();
             currentPage = page;
             libraryPage.SetActive(page == Page.Library);
             notesPage.SetActive(page == Page.Notes);

@@ -434,8 +434,10 @@ namespace ManWellNotesEditor.PhotoSpike
             if (report.summary.platform != BuildTarget.Android) return;
             var plugin = AssetImporter.GetAtPath(PhotoSpikeSetup.PluginPath) as PluginImporter;
             if (plugin != null && plugin.GetCompatibleWithPlatform(BuildTarget.Android) &&
-                PlayerSettings.GetApplicationIdentifier(NamedBuildTarget.Android) != "com.manwell.notes.phototest")
-                throw new BuildFailedException("The photo test plugin is enabled for a production build. Disable Android in its Plugin Inspector, or use Photo Test > Build Android Test APK.");
+                PlayerSettings.GetApplicationIdentifier(NamedBuildTarget.Android) != "com.manwell.notes.phototest" &&
+                PlayerSettings.GetApplicationIdentifier(NamedBuildTarget.Android) != "com.manwell.notes" &&
+                PlayerSettings.GetApplicationIdentifier(NamedBuildTarget.Android) != "com.manwell.notes.photospreview")
+                throw new BuildFailedException("The shared photo library is enabled for an unexpected app ID. Verify the intended app before building.");
         }
     }
 }

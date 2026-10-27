@@ -20,19 +20,24 @@ public final class PhotoBridge {
     }
 
     public static void begin(Activity activity, String source, int size) {
+        beginRequest(activity, source, size, UUID.randomUUID().toString());
+    }
+
+    // The notes app persists this ID together with the initiating note before calling us.
+    public static synchronized boolean beginRequest(Activity activity, String source, int size, String id) {
         if (!source.equals("camera") && !source.equals("picker")) throw new IllegalArgumentException("Images only.");
+        if (id == null || !id.matches("[a-f0-9-]{32,36}")) throw new IllegalArgumentException("Invalid request ID.");
+        if (prefs(activity).getBoolean("pending", false) || PhotoActivity.isImporting()) return false;
+        if (!prefs(activity).edit().putString("id", id).putString("source", source)
+                .putInt("size", Math.max(256, Math.min(size, 2048)))
+                .putString("capture", id + ".jpg").putBoolean("pending", true)
+                .putString("phase", "launch").putString("outcome", "pending").commit()) return false;
         activity.runOnUiThread(() -> {
-            if (prefs(activity).getBoolean("pending", false)) return;
             try {
-                String id = UUID.randomUUID().toString();
-                if (!prefs(activity).edit().putString("id", id).putString("source", source)
-                        .putInt("size", Math.max(256, Math.min(size, 2048)))
-                        .putString("capture", id + ".jpg").putBoolean("pending", true)
-                        .putString("phase", "launch").putString("outcome", "pending").commit())
-                    throw new IllegalStateException("Could not save the pending photo request.");
                 activity.startActivity(new Intent(activity, PhotoActivity.class).putExtra("requestId", id));
             } catch (Exception exception) { finish(activity, "error", "Could not open photo source: " + exception.getMessage()); }
         });
+        return true;
     }
 
     public static String state(Activity activity) {
@@ -40,7 +45,7 @@ public final class PhotoBridge {
         try {
             JSONObject result = new JSONObject();
             result.put("id", p.getString("id", ""));
-            result.put("pending", p.getBoolean("pending", false));
+            result.put("pending", p.getBoolean("pending", false) || PhotoActivity.isImporting());
             result.put("outcome", p.getString("outcome", "ready"));
             result.put("message", p.getString("message", "Take a photo or choose a stored image. This test keeps only the latest accepted image."));
             result.put("path", p.getString("path", ""));
@@ -62,6 +67,16 @@ public final class PhotoBridge {
                 return;
             }
             deleteOwned(activity, old);
+        });
+    }
+
+    public static void acknowledge(Activity activity, String id) {
+        activity.runOnUiThread(() -> {
+            SharedPreferences p = prefs(activity);
+            if (!id.equals(p.getString("id", "")) || p.getBoolean("pending", false) || PhotoActivity.isImporting()) return;
+            String old = p.getString("path", "");
+            if (p.edit().remove("path").remove("width").remove("height").putString("outcome", "ready").commit())
+                deleteOwned(activity, old);
         });
     }
 

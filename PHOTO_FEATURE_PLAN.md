@@ -1,7 +1,7 @@
 # Note photos — implementation plan
 
-Status: Production feature planned; isolated Android test built and under user testing.
-Updated: 26 October 2026
+Status: User confirmed the integrated photo feature and pinch zoom work on 27 October. See PHOTO_INTEGRATION_GUIDE.md for current behavior, editing and validation. Sound recording is being added to the same preview; see SOUND_RECORDING_GUIDE.md. The sections below retain the photo implementation design.
+Updated: 27 October 2026
 
 Device-test progress: the user confirmed successful camera access/capture and stored-image selection/inclusion on 10 September. On 26 October, the user confirmed No preserves the picture, Yes followed by source cancellation preserves it, and successful replacement persists after restart. The test currently accepts PNG/JPG only. Orientation and interruption handling are not yet confirmed on the phone; see PHOTO_TEST_GUIDE.md for the checklist.
 

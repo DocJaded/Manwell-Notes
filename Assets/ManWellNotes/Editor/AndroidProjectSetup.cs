@@ -21,8 +21,8 @@ namespace ManWellNotesEditor
 
             // Version name is user-facing. Version code must increase for every
             // release submitted to an Android app store.
-            PlayerSettings.bundleVersion = "0.1.0";
-            PlayerSettings.Android.bundleVersionCode = 1;
+            // Keep the version set in Player Settings when reconfiguring Android.
+            // Resetting it here would turn an installed update into a downgrade.
 
             // Android 8 is a practical baseline for this small prototype. "Auto"
             // targets the newest API installed with this Unity Editor.
