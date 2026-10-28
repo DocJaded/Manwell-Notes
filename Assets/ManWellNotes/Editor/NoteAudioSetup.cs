@@ -147,6 +147,9 @@ namespace ManWellNotesEditor
             var controller = Resources.FindObjectsOfTypeAll<NoteAudioController>().Single(c => c.gameObject.scene.path == ScenePath);
             var data = new SerializedObject(controller);
             var iterator = data.GetIterator();
+            var dialog = data.FindProperty("removeDialog").objectReferenceValue as GameObject;
+            if (dialog != null && !dialog.transform.parent.gameObject.activeSelf)
+                throw new BuildFailedException("Enable the Sound Dialogs parent. Hide the Remove dialog itself instead.");
             while (iterator.NextVisible(true))
                 if (iterator.propertyType == SerializedPropertyType.ObjectReference && iterator.objectReferenceValue == null)
                     throw new BuildFailedException("Missing audio reference: " + iterator.propertyPath);

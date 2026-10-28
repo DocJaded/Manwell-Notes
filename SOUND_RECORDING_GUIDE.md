@@ -27,6 +27,8 @@ Editable prefabs in `Assets/ManWellNotes/Prefabs/`:
 - **Note Sound**: duration, Play, Stop and Remove controls.
 - **Sound Dialogs**: removal confirmation.
 
+Keep the **Sound Dialogs** parent enabled and its **Remove** child disabled initially. The shared **Picture Dialogs** parent must also stay enabled so messages can appear. In Unity Editor Play Mode, RS displays an Android-only explanation; it does not capture audio from the computer microphone.
+
 Button events are saved in the scene. Runtime code changes content, visibility and availability; it creates no recording UI. **Tools > Man-Well Notes > Sound > Add Missing Recording Interface** creates absent assets/wiring and preserves existing edits. It can run twice without adding duplicates. **Validate Recording Interface** checks references and events; **Run Recording Storage Checks** tests note/file behavior in temporary fixtures.
 
 The existing **Photos > Build Separate Photos Preview APK** menu builds the saved integrated scene, including sound, into `Release_APK/NotesPhotosPreview.apk`. Android must be the active platform. The native recorder and playback bridge are in the existing shared Android library under `PhotoSpike/Plugins/Android`; no new third-party package is required.

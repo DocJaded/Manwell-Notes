@@ -332,6 +332,12 @@ namespace ManWellNotesEditor
             var controller = app.GetComponent<NotePhotoController>();
             if (controller == null) throw new BuildFailedException("Add the saved photo interface first.");
             var data = new SerializedObject(controller);
+            var source = (GameObject)data.FindProperty("sourceDialog").objectReferenceValue;
+            if (source != null && !source.transform.parent.gameObject.activeSelf)
+                throw new BuildFailedException("Enable the Picture Dialogs parent. Hide individual dialogs instead of their parent.");
+            var add = data.FindProperty("addButton").objectReferenceValue as UnityEngine.UI.Button;
+            if (add != null && (!add.gameObject.activeSelf || !add.transform.parent.gameObject.activeSelf))
+                throw new BuildFailedException("Enable Note Picture/Actions and its Add picture button.");
             foreach (string prefabPath in new[] { SectionPath, DialogsPath })
             {
                 int instances = app.GetComponentsInChildren<Transform>(true).Count(item =>
